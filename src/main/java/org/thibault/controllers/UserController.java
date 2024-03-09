@@ -1,6 +1,8 @@
 package org.thibault.controllers;
 
 import org.springframework.web.bind.annotation.*;
+import org.thibault.enums.UserRole;
+import org.thibault.enums.converters.EnumConverter;
 import org.thibault.model.CreateUserDTO;
 import org.thibault.model.UserDTO;
 import org.thibault.proxy.ApiProxy;
@@ -18,7 +20,6 @@ public class UserController {
   
   @GetMapping("/users")
   public List<UserDTO> getAllUsers(){
-    System.out.println("getting all users");
     return apiProxy.getAllUsers();
   }
   
@@ -27,9 +28,23 @@ public class UserController {
     return apiProxy.getUserById(id);
   }
   
+  @GetMapping ("/users/search")
+  public List<UserDTO> getUsersByFilters(@RequestParam (required = false) Integer id,
+                                         @RequestParam (required = false) String username,
+                                         @RequestParam (required = false) String role){
+    UserRole userRole = new EnumConverter().convertStringToRole(role);
+    return apiProxy.getUsersByFilters(id, username, userRole);
+  }
+  
   @PostMapping ("/users")
   public UserDTO addUser(@RequestBody CreateUserDTO createUserDTO){
     return this.apiProxy.addUser(createUserDTO);
+  }
+  
+  @PutMapping ("/users/{id}")
+  public UserDTO updateUser(@PathVariable int id,
+                            @RequestBody CreateUserDTO createUserDTO){
+    return this.apiProxy.updateUser(id, createUserDTO);
   }
   
   @DeleteMapping ("/users/{id}")
@@ -37,5 +52,5 @@ public class UserController {
     return this.apiProxy.deleteUser(id);
   }
   
-  
+
 }

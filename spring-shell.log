@@ -1,0 +1,121 @@
+1709670499135:help
+1709670541440:hello
+1709670546384:help hello
+1709670566615:bye
+1709670567984:dkfjlsm
+1709670571184:hello
+1709670573624:bye
+1709670721183:Hello
+1709670724001:hello
+1709670729616:hello thibault
+1709670930889:get
+1709714780161:hello
+1709714784198:hello thibault
+1709714800124:hello --arg boot
+1709715500281:help
+1709715508426:exit
+1709715569912:help
+1709715644832:example
+1709715648299:parent example
+1709720881780:get
+1709720927159:help
+1709720936938:get help
+1709720939600:get user
+1709721863729:help
+1709722087101:user
+1709722095055:user get
+1709722135381:user --crud get
+1709722163375:user --crud=get
+1709722192968:user get
+1709723919419:test
+1709723925181:test id
+1709723928195:test id peo
+1709723933672:test id peo oep
+1709902899034:get users
+1709902903317:users get
+1709902911028:user get
+1709904730822:get user
+1709904733490:-h
+1709904736301:help
+1709904742785:user get
+1709905567452:company get 2
+1709905746532:company get id 2
+1709905753156:company get id=2
+1709906478143:company get 5
+1709906502276:company get 2
+1709906515206:company get provider
+1709906529989:company get type=PROVIDER
+1709906621409:company get --type PROVIDER
+1709906632645:company get
+1709906635925:company get 2
+1709906663585:company get --country Belgium
+1709906670129:company get --id 2
+1709906694757:company get --id 2 --name ACME
+1709906705739:company get --name ACME
+1709906896081:company get --country Belgium
+1709906939839:stacktrace
+1709907040855:company get --country Belgium
+1709907046659:stacktrace
+1709907083297:company get --country Belgium
+1709907218427:company get --type PROVIDER
+1709907234248:company get --type provider
+1709907241147:stacktrace
+1709907268699:company get --country Japan
+1709907658770:company get --country Belgium
+1709907675922:company get --type PROVIDER
+1709907689415:company get --type provider
+1709909261919:company get --country Belgium
+1709909319597:company get --type client
+1709909605393:company get --type provider
+1709909619758:company get --type client --country Belgium
+1709910027443:user get
+1709910044624:company get -t client
+1709910056767:company get -t provicer -c Japan
+1709910352353:company get
+1709910813709:fgfh3
+1709910818208:company
+1709910822844:company get
+1709911247858:get user
+1709911250109:user get
+1709913144317:user get --id 5
+1710020931323:user get
+1710020948126:user get --id 2
+1710021096409:user get
+1710021102229:user get --id 2
+1710021118549:stacktrace
+1710021218303:get user --user ranu
+1710021226237:user get --user ranu
+1710021236157:user get --role admin
+1710021255814:user get --role=admin
+1710021277460:company get
+1710021292758:company get --country Belgium
+1710021333535:user get --role admin
+1710021341296:user get --id 2
+1710021351460:user get --user ranu
+1710021376653:user get --role admin
+1710021619631:user get --user ranu
+1710021626933:user get --user thibault
+1710023680029:user get
+1710023700884:user get --user ranu
+1710023787605:user get
+1710024118311:user get -r ranu
+1710024404932:user get -u Thibault
+1710024410644:user get -u ranu
+1710024430348:stacktrace
+1710024758263:user get -r admin
+1710024769212:user get -u thibault
+1710025099128:user post -u babybollie4 -p thibault -r accountant
+1710025180912:user post -u thibault -p thibault -r admin
+1710026102380:user delete -id 32
+1710026116331:user deleted --id 32
+1710026195508:user delete --id 34
+1710026226381:user deleted --id 33
+1710026244154:user delete --id 33
+1710028195997:user updated --id 32 --user euirotgurp
+1710028267518:user update --id 32 -u thibauoprgfpo
+1710028306855:user put --id 32 -u thibaultrigep
+1710028345804:user put --id 32 -u thibaultrjrgfep
+1710028358472:stacktrace
+1710028480554:user put --id 32 -u fejreoghpr
+1710028500608:q
+1710028503432:exit

@@ -1,15 +1,18 @@
 package org.thibault.model;
 
-  
+import org.springframework.stereotype.Component;
+import org.thibault.enums.UserRole;
+
+@Component
   public class UserDTO {
     
     private int id;
     private String username;
-    private String role;
+    private UserRole role;
     
     public UserDTO(){}
     
-    public UserDTO(int id, String username, String role) {
+    public UserDTO(int id, String username, UserRole role) {
       this.id = id;
       this.username = username;
       this.role = role;
@@ -23,11 +26,11 @@ package org.thibault.model;
       this.username = username;
     }
     
-    public String getRole() {
+    public UserRole getRole() {
       return role;
     }
     
-    public void setRole(String role) {
+    public void setRole(UserRole role) {
       this.role = role;
     }
     
@@ -38,6 +41,12 @@ package org.thibault.model;
     public void setId(int id){
       this.id = id;
     }
+    
+    @Override
+    public String toString(){
+      return this.id + " - " + this.username + " - " + this.role;
+    }
+    
   }
   
 
