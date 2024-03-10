@@ -29,7 +29,7 @@ public class UserCommand {
         if(id == null && username == null && role == null) {
           getAllUsers();
         } else {
-          getUsersByFilter(id, username, role);
+          getUsersByFilters(id, username, role);
         }
         break;
       case ("post"):
@@ -53,7 +53,7 @@ public class UserCommand {
     }
   }
   
-  private void getUsersByFilter(Integer id, String username, String role){
+  private void getUsersByFilters(Integer id, String username, String role){
     this.userController.getUsersByFilters(id, username, role)
             .forEach(userDTO -> System.out.println(userDTO.toString()));
   }

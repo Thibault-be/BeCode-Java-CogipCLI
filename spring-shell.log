@@ -119,3 +119,41 @@
 1710028480554:user put --id 32 -u fejreoghpr
 1710028500608:q
 1710028503432:exit
+1710082461146:user get
+1710082468637:user get --id 4
+1710082478640:uset get -r admin
+1710082494063:user get -r admin
+1710082504852:user get -u Darwin
+1710082521525:user post darwinnst darwin intern
+1710082551215:user -u darwinst -p darwin -r intern
+1710082564239:user post -u darwinst -p darwin -r intern
+1710082580804:user delete 35
+1710082613791:user put -i 32 -u testtesttest
+1710082921491:quit
+1710083035156:company get
+1710083537532:get company --id 1
+1710083547043:company get --id 1
+1710083557973:company get --country Belgium
+1710083597244:company get --country Poland --type provider
+1710083638711:company get --country Belgium --type provider
+1710083764899:company get
+1710083779244:company get --type provider
+1710084007139:company get
+1710084067838:company get -c Belgium
+1710084186751:company get -c Belgium -r provider
+1710084223571:company get -c Belgium -t provider
+1710084759389:company post -n ThibaultDhooghe -c Holland -v 999777 -t client
+1710084824099:stacktrace
+1710085158287:company post -n ThibaultDhooghe -c Beligum -v 9997777 -t provider
+1710086203470:company post -n juliepoiuytr -c Beligum -v 333555-t provider
+1710086213233:company post -n juliepoiuytr -c Beligum -v 333555 -t provider
+1710086453252:company post -n JillTavernier -c Hungary -v 147852369 -t provider
+1710086483290:company get -n JillTavernier
+1710086804298:company delete 32
+1710086815385:company delete 33
+1710086890849:company delete 31
+1710086946682:company delete 30
+1710087505049:company put -i 29 -n Beatrijs
+1710087601370:company put --id 29 -n Beatrijs
+1710087800178:company put --id 29 -n Elie
+1710087906442:company put --id 19 -n THIBAULTDHOOGHE -c Russia -t provider

@@ -15,6 +15,7 @@ import java.util.List;
 @FeignClient(name = "cogip", url="${name.service.url}")
 public interface ApiProxy {
   
+  //********USER MAPPING*********//
   @GetMapping ("/users")
   List<UserDTO> getAllUsers();
   
@@ -36,6 +37,7 @@ public interface ApiProxy {
   @DeleteMapping ("/users/{id}")
   String deleteUser(@PathVariable("id") int id);
   
+  //********COMPANY MAPPING*********//
   @GetMapping("/companies/search")
   List<CompanyDTO> searchCompaniesByFilters(
           @RequestParam (required = false) Integer id,
@@ -46,4 +48,16 @@ public interface ApiProxy {
   
   @GetMapping("/companies")
   List<CompanyDTO> getAllCompanies();
+  
+  @PostMapping ("/companies/add")
+  CompanyDTO addCompany(@RequestBody CompanyDTO companyDTO);
+  
+  @PutMapping ("/companies/{id}")
+  CompanyDTO updateCompany(@PathVariable("id") int id,
+                           @RequestBody CompanyDTO companyDTO);
+  
+  @DeleteMapping ("/companies/{id}")
+  public String deleteCompany(@PathVariable("id") int id);
+  
+  
 }

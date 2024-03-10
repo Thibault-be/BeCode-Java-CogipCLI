@@ -1,8 +1,6 @@
 package org.thibault.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.thibault.enums.CompanyType;
 import org.thibault.model.CompanyDTO;
 import org.thibault.proxy.ApiProxy;
@@ -33,7 +31,20 @@ public class CompanyController {
     return apiProxy.searchCompaniesByFilters(
             id, name, country, vat, type);
   }
-
-
-
+  
+  @PostMapping ("/companies/add")
+  public CompanyDTO addCompany(@RequestBody CompanyDTO companyDTO){
+    return this.apiProxy.addCompany(companyDTO);
+  }
+  
+  @PutMapping("/companies/{id}")
+  public CompanyDTO updateCompany(@PathVariable("id") int id,
+                                  @RequestBody CompanyDTO companyDTO){
+    return this.apiProxy.updateCompany(id, companyDTO);
+  }
+  
+  @DeleteMapping ("/companies/{id}")
+  public String deleteCompany(@PathVariable("id") int id){
+    return this.apiProxy.deleteCompany(id);
+  }
 }
