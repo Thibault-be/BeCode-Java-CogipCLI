@@ -51,7 +51,7 @@ public class ContactController {
     return this.apiProxy.updateContact(id, contact);
   }
   
-  @DeleteMapping("/contacts/delete/{id}")
+  @DeleteMapping("/contacts/{id}")
   public String deleteContact(@PathVariable int id){
     return this.apiProxy.deleteContact(id);
   }

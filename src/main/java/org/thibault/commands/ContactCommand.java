@@ -5,6 +5,8 @@ import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
 import org.thibault.controllers.ContactController;
 import org.thibault.model.CompanyDTO;
+import org.thibault.model.ContactDTO;
+
 import java.util.List;
 
 
@@ -28,16 +30,20 @@ import java.util.List;
       
       switch (crud) {
         case ("get"):
-          if (id == null && firstname == null && lastname == null && phone == null && email == null && companyId == null){
+          if (id == null && firstname == null && lastname == null && phone == null && companyId == null){
             getAllContacts();
+          } else {
+            getContactsByFilters(id, firstname, lastname, phone, companyId);
           }
-          
           break;
         case ("post"):
+          addContact(firstname, lastname, phone, email, companyId);
           break;
         case ("put"):
+          updateContact(id, firstname, lastname, phone, email, companyId);
           break;
         case ("delete"):
+          deleteContact(id);
           break;
       }
       return null;
@@ -48,11 +54,25 @@ import java.util.List;
               .forEach(contact -> System.out.println(contact));
     }
     
-    private void getContactsByFilters(){}
+    private void getContactsByFilters(Integer id, String firstname, String lastname, String phone, Integer companyId){
+      this.contactController.getContactsByFilters(id, firstname, lastname, phone, companyId)
+              .forEach(System.out::println);
+    }
     
-    private void updateContact(){}
+    private void addContact(String firstname, String lastname, String phone, String email, Integer companyId){
+      ContactDTO contactToAdd = new ContactDTO(firstname, lastname, phone, email, companyId);
+      System.out.println(this.contactController.addContact(contactToAdd));
+    }
     
-    private void deleteContact(){}
+    
+    private void updateContact(int id, String firstname, String lastname, String phone, String email, Integer companyId){
+      ContactDTO contactToUpdate = new ContactDTO(firstname, lastname, phone, email, companyId);
+      System.out.println(this.contactController.updateContact(id, contactToUpdate));
+    }
+    
+    private void deleteContact(int id){
+      System.out.println(this.contactController.deleteContact(id));
+    }
     
   }
   

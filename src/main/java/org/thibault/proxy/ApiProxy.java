@@ -4,9 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
-import org.thibault.enums.CompanyType;
-import org.thibault.enums.Currency;
-import org.thibault.enums.UserRole;
+import org.thibault.enums.*;
 import org.thibault.model.*;
 
 import java.util.List;
@@ -90,9 +88,8 @@ public interface ApiProxy {
   @GetMapping ("/invoices")
   List<InvoiceDTO> getAllInvoices();
   
-  
-  @GetMapping("invoices/{id}")
-  InvoiceDTO getInvoiceById(@PathVariable("id") int id);
+//  @GetMapping("invoices/{id}")
+//  InvoiceDTO getInvoiceById(@PathVariable("id") int id);
   
   @GetMapping ("/invoices/search")
   List<InvoiceDTO> searchInvoicesByFilters(
@@ -100,15 +97,15 @@ public interface ApiProxy {
           @RequestParam (required = false) Integer companyId,
           @RequestParam (required = false) String invoiceNumber,
           @RequestParam (required = false) Currency currency,
-          @RequestParam (required = false) String type,
-          @RequestParam (required = false) String status
+          @RequestParam (required = false) InvoiceType type,
+          @RequestParam (required = false) InvoiceStatus status
   );
   
   @PostMapping ("/invoices")
   ResponseEntity<String> addInvoice(@RequestBody InvoiceDTO invoice);
   
   @PutMapping ("invoices/{id}")
-  ResponseEntity<InvoiceDTO> updateInvoice(
+  InvoiceDTO updateInvoice(
           @PathVariable int id,
           @RequestBody InvoiceDTO invoice);
   

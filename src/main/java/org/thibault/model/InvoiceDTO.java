@@ -93,4 +93,10 @@ public class InvoiceDTO {
   public void setStatus(InvoiceStatus status) {
     this.status = status;
   }
+  
+  @Override
+  public String toString(){
+    return this.id + " - " + this.companyId + " - " + this.contactId+ " - " + this.invoiceNumber + " - " +this.value
+            + " - " + this.currency + " - " + this.type + " - " + this.status;
+  }
 }

@@ -165,3 +165,21 @@
 1710091938686:company get
 1710091980110:company post -n Peter -c Japan -v 666666 -t client
 1710092013300:contact get
+1710093472005:contact get -c 1
+1710093593493:contact get -f Pieter -l "De Swaef"
+1710093922774:contact post -f Thibault -l Dhooghe -p 0478583364 -e thibault@gmail.com -c 1
+1710094357674:stacktrace
+1710094386388:contact get
+1710094396986:contact get -f Thibault
+1710094707214:contact post -f Tommy -l Dhooghe -p 0478583364 -e thibault@gmail.com -c 1
+1710094760114:contact post -f Tommy -l Bennet -p 0478583364 -e thibault@gmail.com -c 1
+1710100394476:contact put 17 -f Matthieu -l vanculo
+1710100415491:contact get
+1710100448590:contact put --id --firstname Matthiue --lastname gisteren
+1710100508729:contact put --id 17 -f Matthieu -l gisteren
+1710100688270:contact delete 17
+1710101969469:invoice get
+1710103235762:invoice get --currency eur
+1710103419271:stacktrace
+1710103595326:invoice get --currency usd
+1710103656784:invoice get --companyId 2
