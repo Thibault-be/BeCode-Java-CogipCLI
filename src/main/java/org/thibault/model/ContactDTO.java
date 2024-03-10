@@ -67,4 +67,9 @@ public class ContactDTO {
   public void setCompanyId(Integer companyId) {
     this.companyId = companyId;
   }
+  
+  @Override
+  public String toString(){
+    return this.id + " - " + this.firstname + " - " + this.lastname + " - " + this.phone + " - " + this.email + " - " + this.companyId;
+  }
 }

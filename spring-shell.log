@@ -162,3 +162,6 @@
 1710089365378:company delete --id 999
 1710089376671:stacktrace
 1710089468544:company delete --id 999
+1710091938686:company get
+1710091980110:company post -n Peter -c Japan -v 666666 -t client
+1710092013300:contact get
