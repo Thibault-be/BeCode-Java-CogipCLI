@@ -183,3 +183,20 @@
 1710103419271:stacktrace
 1710103595326:invoice get --currency usd
 1710103656784:invoice get --companyId 2
+1710104400456:invoice post --comp 1 --cont 2 --inv 555999 -v 77777 -c eur -t incoming -s paid
+1710104734072:invoice post --comp 1 --cont 2 --inv 666666 -v 666 -c eur -t incoming -s paid
+1710105278510:invoice put --id 24 -v 24000
+1710105291053:stacktrace
+1710105325050:invoice put --id 24 --value 24000
+1710105368217:company put --id 24 --value 24000
+1710105395905:invoice put --id 24 --value 242424
+1710105452776:invoice get
+1710105458120:invoice get --id 24
+1710105470694:invoice put --id 24 --comp 2
+1710105492407:invoice put --id 24 --comp 2 --cont 2 --value 242424
+1710105561324:invoice put --id 24 -v 666
+1710105572332:stacktrace
+1710105649506:invoice get --id 24
+1710105930085:invoice put --id 24 --value 666
+1710105947040:stacktrace
+1710106281019:invoice put --id 24 --value 32000

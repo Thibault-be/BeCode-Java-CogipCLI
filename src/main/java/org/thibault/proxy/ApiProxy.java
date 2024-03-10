@@ -102,11 +102,10 @@ public interface ApiProxy {
   );
   
   @PostMapping ("/invoices")
-  ResponseEntity<String> addInvoice(@RequestBody InvoiceDTO invoice);
+  InvoiceDTO addInvoice(@RequestBody InvoiceDTO invoice);
   
   @PutMapping ("invoices/{id}")
-  InvoiceDTO updateInvoice(
-          @PathVariable int id,
-          @RequestBody InvoiceDTO invoice);
+  InvoiceDTO updateInvoice(@PathVariable int id,
+                           @RequestBody InvoiceDTO invoice);
   
 }

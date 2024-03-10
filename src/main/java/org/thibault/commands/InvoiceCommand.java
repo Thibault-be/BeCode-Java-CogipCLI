@@ -7,6 +7,7 @@ import org.thibault.enums.Currency;
 import org.thibault.enums.InvoiceStatus;
 import org.thibault.enums.InvoiceType;
 import org.thibault.enums.converters.EnumConverter;
+import org.thibault.model.InvoiceDTO;
 
 import java.math.BigDecimal;
 
@@ -24,7 +25,7 @@ public class InvoiceCommand {
                              @Option (longNames= "id", shortNames = 'i') Integer id,
                              @Option (longNames = {"companyId", "company", "comp"}) Integer companyId,
                              @Option (longNames = {"contactId", "contact", "cont"}) Integer contactId,
-                             @Option (longNames = {"invoiceNumber","invoice", "in"}) String invoiceNumber,
+                             @Option (longNames = {"invoiceNumber","invoice", "inv"}) String invoiceNumber,
                              @Option (longNames = {"value", "val"}, shortNames = 'v')BigDecimal value,
                              @Option (longNames = {"currency", "cur"}, shortNames = 'c') String currency,
                              @Option (longNames = {"invoiceType", "type"}, shortNames = 't') String type,
@@ -39,9 +40,16 @@ public class InvoiceCommand {
         if (id == null && companyId == null && contactId == null && invoiceNumber == null &&
             value == null && currencyEnum == null && typeEnum  == null && statusEnum  == null){
           getAllInvoices();
-        }else{
+        } else{
           getInvoicesByFilters(id, companyId, invoiceNumber, currencyEnum, typeEnum, statusEnum);
         }
+        break;
+      case ("post"):
+        addInvoice(companyId, contactId, invoiceNumber, value, currencyEnum, typeEnum, statusEnum);
+        break;
+      case ("put"):
+        updateInvoice(id, companyId, contactId, invoiceNumber, value, currencyEnum, typeEnum, statusEnum);
+        break;
     }
   }
   
@@ -54,7 +62,18 @@ public class InvoiceCommand {
                                      Currency currency, InvoiceType type, InvoiceStatus status){
     this.invoiceController.searchInvoicesByFilters(id, companyId,  invoiceNumber, currency,
             type, status).forEach(System.out::println);
-    
   }
   
+  private void addInvoice(int companyId, int contactId, String invoiceNumber, BigDecimal value,
+                          Currency currencyEnum, InvoiceType typeEnum, InvoiceStatus statusEnum){
+    InvoiceDTO invoiceToAdd = new InvoiceDTO(companyId, contactId, invoiceNumber, value, currencyEnum, typeEnum, statusEnum);
+    System.out.println(this.invoiceController.addInvoice(invoiceToAdd));
+  }
+  
+  private void updateInvoice(int id, Integer companyId, Integer contactId, String invoiceNumber, BigDecimal value,
+                            Currency currencyEnum, InvoiceType typeEnum, InvoiceStatus statusEnum){
+    InvoiceDTO invoiceToUpdate = new InvoiceDTO(companyId, contactId, invoiceNumber, value,
+                                      currencyEnum, typeEnum, statusEnum);
+    System.out.println(this.invoiceController.updateInvoice(id, invoiceToUpdate));
+  }
 }

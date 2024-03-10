@@ -26,11 +26,6 @@ public class InvoiceController {
     return this.apiProxy.getAllInvoices();
   }
   
-//  @GetMapping("invoices/{id}")
-//  public Invoice getInvoiceById(@PathVariable("id") int id){
-//    return this.invoiceService.getInvoiceById(id);
-//  }
-  
   @GetMapping ("/invoices/search")
   public List<InvoiceDTO> searchInvoicesByFilters(
           @RequestParam(required = false) Integer id,
@@ -44,21 +39,15 @@ public class InvoiceController {
   }
   
   @PostMapping("/invoices")
-  public ResponseEntity<String> addInvoice(@RequestBody InvoiceDTO invoice){
-    this.apiProxy.addInvoice(invoice);
-    return ResponseEntity
-            .status(HttpStatus.CREATED)
-            .body("Invoice with number " + invoice.getInvoiceNumber() + " was successfully added" );
+  public InvoiceDTO addInvoice(@RequestBody InvoiceDTO invoice){
+    return this.apiProxy.addInvoice(invoice);
   }
   
   @PutMapping ("invoices/{id}")
-  public ResponseEntity<InvoiceDTO> updateInvoice(
-          @PathVariable int id,
-          @RequestBody InvoiceDTO invoice){
-    InvoiceDTO updatedInvoice = this.apiProxy.updateInvoice(id, invoice);
-    return ResponseEntity
-            .status(HttpStatus.OK)
-            .body(updatedInvoice);
+  public InvoiceDTO updateInvoice(
+          @PathVariable("id") int id,
+          @RequestBody InvoiceDTO invoiceDTO){
+    return this.apiProxy.updateInvoice(id, invoiceDTO);
   }
   
   

@@ -9,8 +9,8 @@ import java.math.BigDecimal;
 public class InvoiceDTO {
   
   private int id;
-  private int companyId;
-  private int contactId;
+  private Integer companyId;
+  private Integer contactId;
   private String invoiceNumber;
   private BigDecimal value;
   private Currency currency;
@@ -18,6 +18,16 @@ public class InvoiceDTO {
   private InvoiceStatus status;
   
   public InvoiceDTO(){}
+  
+  public InvoiceDTO(Integer companyId, Integer contactId, String invoiceNumber, BigDecimal value, Currency currency, InvoiceType type, InvoiceStatus status) {
+    this.companyId = companyId;
+    this.contactId = contactId;
+    this.invoiceNumber = invoiceNumber;
+    this.value = value;
+    this.currency = currency;
+    this.type = type;
+    this.status = status;
+  }
   
   public InvoiceDTO(int id, Integer companyId, Integer contactId, String invoiceNumber, BigDecimal value, Currency currency, InvoiceType type, InvoiceStatus status) {
     this.id = id;
@@ -38,7 +48,7 @@ public class InvoiceDTO {
     this.id = id;
   }
   
-  public int getCompanyId() {
+  public Integer getCompanyId() {
     return companyId;
   }
   
@@ -46,7 +56,7 @@ public class InvoiceDTO {
     this.companyId = companyId;
   }
   
-  public int getContactId() {
+  public Integer getContactId() {
     return contactId;
   }
   
