@@ -157,3 +157,8 @@
 1710087601370:company put --id 29 -n Beatrijs
 1710087800178:company put --id 29 -n Elie
 1710087906442:company put --id 19 -n THIBAULTDHOOGHE -c Russia -t provider
+1710088400172:company delete --id 100
+1710088660536:company delete --id 290
+1710089365378:company delete --id 999
+1710089376671:stacktrace
+1710089468544:company delete --id 999

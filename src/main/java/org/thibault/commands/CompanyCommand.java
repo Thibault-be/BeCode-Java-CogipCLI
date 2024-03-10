@@ -1,6 +1,7 @@
 package org.thibault.commands;
 
 
+import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
@@ -75,7 +76,11 @@ public class CompanyCommand {
   }
   
   private void deleteCompany(int id){
-    System.out.println(this.companyController.deleteCompany(id));
+    try {
+      System.out.println(this.companyController.deleteCompany(id));
+    } catch (FeignException.NotFound ex){
+      System.out.println(ex.contentUTF8());
+    }
   }
   
 }

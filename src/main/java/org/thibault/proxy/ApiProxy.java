@@ -1,13 +1,13 @@
 package org.thibault.proxy;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.thibault.enums.CompanyType;
+import org.thibault.enums.Currency;
 import org.thibault.enums.UserRole;
-import org.thibault.model.CompanyDTO;
-import org.thibault.model.CreateUserDTO;
-import org.thibault.model.UserDTO;
+import org.thibault.model.*;
 
 import java.util.List;
 
@@ -57,7 +57,59 @@ public interface ApiProxy {
                            @RequestBody CompanyDTO companyDTO);
   
   @DeleteMapping ("/companies/{id}")
-  public String deleteCompany(@PathVariable("id") int id);
+  String deleteCompany(@PathVariable("id") int id);
   
+  //********CONTACT MAPPING*********//
+  @GetMapping ("/contacts")
+  List<ContactDTO> getAllContacts();
+  
+  @GetMapping ("/contacts/{id}")
+  ContactDTO getContactById(@PathVariable("id") int id);
+  
+  @GetMapping ("/contacts/search")
+  List<ContactDTO> getContactsByFilters(
+          @RequestParam (required = false) Integer id,
+          @RequestParam (required = false) String firstname,
+          @RequestParam (required = false) String lastname,
+          @RequestParam (required = false) String phone,
+          @RequestParam (required = false) Integer companyId
+  );
+  
+  @PostMapping ("/contacts")
+  ContactDTO addContact(@RequestBody ContactDTO contactDTO);
+  
+  @PutMapping ("contacts/{id}")
+  ContactDTO updateContact(@PathVariable("id") int id,
+                           @RequestBody ContactDTO contactDTO);
+  
+  @DeleteMapping ("contacts/{id}")
+  String deleteContact(@PathVariable("id") int id);
+  
+  
+  //********INVOICE MAPPING*********//
+  @GetMapping ("/invoices")
+  List<InvoiceDTO> getAllInvoices();
+  
+  
+  @GetMapping("invoices/{id}")
+  InvoiceDTO getInvoiceById(@PathVariable("id") int id);
+  
+  @GetMapping ("/invoices/search")
+  List<InvoiceDTO> searchInvoicesByFilters(
+          @RequestParam (required = false) Integer id,
+          @RequestParam (required = false) Integer companyId,
+          @RequestParam (required = false) String invoiceNumber,
+          @RequestParam (required = false) Currency currency,
+          @RequestParam (required = false) String type,
+          @RequestParam (required = false) String status
+  );
+  
+  @PostMapping ("/invoices")
+  ResponseEntity<String> addInvoice(@RequestBody InvoiceDTO invoice);
+  
+  @PutMapping ("invoices/{id}")
+  ResponseEntity<InvoiceDTO> updateInvoice(
+          @PathVariable int id,
+          @RequestBody InvoiceDTO invoice);
   
 }
