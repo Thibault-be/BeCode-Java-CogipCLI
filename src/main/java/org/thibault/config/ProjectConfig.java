@@ -24,9 +24,6 @@ public class ProjectConfig {
   public BasicAuthRequestInterceptor basicAuthRequestInterceptor(){
     return new BasicAuthRequestInterceptor(username, password);
   }
-
-  @Bean
-  public PasswordEncoder passwordEncoder(){
-    return new BCryptPasswordEncoder();
-  }
+  
+  
 }

@@ -110,7 +110,6 @@ public interface ApiProxy {
   
   
   //********AUTHENTICATION MAPPING*********//
-  @PostMapping ("/api/login")
-  String login(@RequestBody LoginDetails loginDetails);
+
   
 }
