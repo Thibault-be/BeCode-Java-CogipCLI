@@ -200,3 +200,29 @@
 1710105930085:invoice put --id 24 --value 666
 1710105947040:stacktrace
 1710106281019:invoice put --id 24 --value 32000
+1710163249090:user get
+1710167139180:login
+1710167150550:login -u admin -p admin
+1710169213232:stacktrace
+1710169290457:login -u admin -p admin
+1710169296309:stacktrace
+1710236145606:login -u admin -p admin
+1710236372585:stacktrace
+1710236454997:login -u admin -p admin
+1710237144545:login -u ranu -p 1234
+1710237381388:}
+1710237381391:this is the bean in my CLI projectconfig
+1710237381394:shell:>login -u ranu -p 1234
+1710237381396:$2a$10$v2CBcQWQaC7/7V4l/jiDo.qhgk1UJtYfrKwAkUF0LK2EnkTnGmk3W
+1710237381398:username ranu
+1710237381399:password 1234
+1710237381403:encoded password: $10$v2CBcQWQaC7/7V4l/jiDo.qhgk1UJtYfrKwAkUF0LK2EnkTnGmk3W
+1710237381406:in the console of my rest api i see this:
+1710237381411:2024-03-12T10:52:40.411+01:00  WARN 18472 --- [nio-8080-exec-3] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Encoded password does not look like BCrypt
+1710237392176:how is that possible?login -u ranu -p 1234
+1710237405750:login -u ranu -p 1234
+1710238045995:login -u ranu -1234
+1710238056594:login -u ranu -p 1234
+1710239778537:user get
+1710239784728:stacktrace
+1710239832303:user get

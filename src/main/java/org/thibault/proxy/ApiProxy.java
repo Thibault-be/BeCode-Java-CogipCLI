@@ -108,4 +108,9 @@ public interface ApiProxy {
   InvoiceDTO updateInvoice(@PathVariable int id,
                            @RequestBody InvoiceDTO invoice);
   
+  
+  //********AUTHENTICATION MAPPING*********//
+  @PostMapping ("/api/login")
+  String login(@RequestBody LoginDetails loginDetails);
+  
 }
