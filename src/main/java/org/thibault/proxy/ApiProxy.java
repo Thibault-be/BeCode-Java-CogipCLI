@@ -110,6 +110,8 @@ public interface ApiProxy {
   
   
   //********AUTHENTICATION MAPPING*********//
+  @PostMapping ("/login")
+  ResponseEntity<AuthResponseDTO> login(@RequestBody UserCredentials userCredentials);
 
   
 }
