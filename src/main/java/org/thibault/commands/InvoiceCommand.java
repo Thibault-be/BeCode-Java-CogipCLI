@@ -5,6 +5,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
 import org.thibault.config.ProjectConfig;
+import org.thibault.controllers.AuthController;
 import org.thibault.controllers.InvoiceController;
 import org.thibault.enums.Currency;
 import org.thibault.enums.InvoiceStatus;
@@ -19,13 +20,17 @@ import java.math.BigDecimal;
 public class InvoiceCommand {
   
   
-  private AuthResponseDTO authResponseDTO;
+  //private AuthResponseDTO authResponseDTO;
   private final InvoiceController invoiceController;
   
   @Autowired
-  public InvoiceCommand(InvoiceController invoiceController, AuthResponseDTO authResponseDTO) {
+  private final AuthController authController;
+  
+  @Autowired
+  public InvoiceCommand(InvoiceController invoiceController, AuthController authController){ //, AuthResponseDTO authResponseDTO) {
     this.invoiceController = invoiceController;
-    this.authResponseDTO = authResponseDTO;
+    this.authController = authController;
+    //this.authResponseDTO = authResponseDTO;
   }
   
   @Command(command = "invoice", description = "Commands for the invoices.")
@@ -62,7 +67,9 @@ public class InvoiceCommand {
   }
   
   private void getAllInvoices(){
-    System.out.println(this.authResponseDTO.getAccessToken());
+    //System.out.println(this.authResponseDTO.getAccessToken());
+    String accessToken = this.authController.getAuthResponseDTO().getAccessToken();
+    System.out.println(accessToken);
     this.invoiceController.getAllInvoices()
             .forEach(invoice -> System.out.println(invoice));
   }

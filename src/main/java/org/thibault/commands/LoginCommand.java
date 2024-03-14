@@ -14,12 +14,12 @@ import org.thibault.model.UserCredentials;
 @Command (group= "Login", description = "Command to log in to the service.")
 public class LoginCommand {
   
-  private AuthResponseDTO authResponseDTO;
+  //private AuthResponseDTO authResponseDTO;
   private AuthController authController;
   
   @Autowired
-  public LoginCommand(AuthResponseDTO authResponseDTO, AuthController authController) {
-    this.authResponseDTO = authResponseDTO;
+  public LoginCommand(AuthController authController){ //AuthResponseDTO authResponseDTO){
+    //this.authResponseDTO = authResponseDTO;
     this.authController = authController;
   }
   
@@ -29,12 +29,14 @@ public class LoginCommand {
     
     
     UserCredentials userCredentials = new UserCredentials(username, password,  UserRole.ADMIN);
-    //ResponseEntity<AuthResponseDTO> authDTO =  this.authController.login(userCredentials);
+    ResponseEntity<AuthResponseDTO> authDTO =  this.authController.login(userCredentials);
     
-    this.authResponseDTO = this.authController.login(userCredentials).getBody();
+    System.out.println(this.authController.getAuthResponseDTO().getAccessToken());
+    //this.authResponseDTO = this.authController.login(userCredentials).getBody();
     //this.authResponseDTO = authDTO.getBody();
     
-    return authResponseDTO.getAccessToken();
+    //return authResponseDTO.getAccessToken();
     //return authDTO.getBody();
+    return "";
   }
 }
