@@ -1,42 +1,58 @@
 package org.thibault.commands;
 
+import feign.Feign;
+import feign.auth.BasicAuthRequestInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.http.ResponseEntity;
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
-import org.thibault.config.ProjectConfig;
 import org.thibault.controllers.AuthController;
 import org.thibault.enums.UserRole;
 import org.thibault.model.AuthResponseDTO;
 import org.thibault.model.UserCredentials;
+import org.thibault.proxy.ApiProxy;
 
 @Command (group= "Login", description = "Command to log in to the service.")
 public class LoginCommand {
   
-  //private AuthResponseDTO authResponseDTO;
-  private AuthController authController;
+  private final AuthController authController;
+  private final ApiProxy apiProxy;
   
   @Autowired
-  public LoginCommand(AuthController authController){ //AuthResponseDTO authResponseDTO){
-    //this.authResponseDTO = authResponseDTO;
+  public LoginCommand(AuthController authController, ApiProxy apiProxy){
     this.authController = authController;
+    this.apiProxy = apiProxy;
   }
   
   @Command (command = "login", description = "To log in into the system.")
   public String login(@Option (longNames = {"username", "user"}, shortNames = 'u', required = true) String username,
                                @Option (longNames = {"password", "pass"}, shortNames = 'p', required = true) String password) {
     
+    String basicAuthHeader = "Basic " + java.util.Base64.getEncoder().encodeToString((username + ":" + password).getBytes());
     
-    UserCredentials userCredentials = new UserCredentials(username, password,  UserRole.ADMIN);
-    ResponseEntity<AuthResponseDTO> authDTO =  this.authController.login(userCredentials);
+    //UserCredentials userCredentials = new UserCredentials(username, password,  UserRole.ADMIN);
     
-    System.out.println(this.authController.getAuthResponseDTO().getAccessToken());
-    //this.authResponseDTO = this.authController.login(userCredentials).getBody();
-    //this.authResponseDTO = authDTO.getBody();
+    ResponseEntity<AuthResponseDTO> authDTO =  this.authController.login(basicAuthHeader,
+            new UserCredentials(username, password, UserRole.ADMIN));
     
-    //return authResponseDTO.getAccessToken();
-    //return authDTO.getBody();
+    
+    //ResponseEntity<AuthResponseDTO> authDTO =  this.authController.login(userCredentials);
+    
+    
+    //System.out.println(this.authController.getAuthResponseDTO().getAccessToken());
+    
+    if (authDTO.getStatusCode().is2xxSuccessful()) {
+      AuthResponseDTO authResponseDTO = authDTO.getBody();
+      if (authResponseDTO != null) {
+        System.out.println("Login successful. Access token: " + authResponseDTO.getAccessToken());
+      } else {
+        System.out.println("Authentication failed. No response received.");
+      }
+    } else {
+      System.out.println("Authentication failed. Status code: " + authDTO.getStatusCodeValue());
+    }
+    
+
     return "";
   }
 }

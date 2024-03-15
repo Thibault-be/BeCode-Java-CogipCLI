@@ -20,7 +20,6 @@ import java.math.BigDecimal;
 public class InvoiceCommand {
   
   
-  //private AuthResponseDTO authResponseDTO;
   private final InvoiceController invoiceController;
   
   @Autowired
@@ -30,7 +29,6 @@ public class InvoiceCommand {
   public InvoiceCommand(InvoiceController invoiceController, AuthController authController){ //, AuthResponseDTO authResponseDTO) {
     this.invoiceController = invoiceController;
     this.authController = authController;
-    //this.authResponseDTO = authResponseDTO;
   }
   
   @Command(command = "invoice", description = "Commands for the invoices.")
@@ -70,7 +68,7 @@ public class InvoiceCommand {
     //System.out.println(this.authResponseDTO.getAccessToken());
     String accessToken = this.authController.getAuthResponseDTO().getAccessToken();
     System.out.println(accessToken);
-    this.invoiceController.getAllInvoices()
+    this.invoiceController.getAllInvoices("Bearer " + accessToken)
             .forEach(invoice -> System.out.println(invoice));
   }
   

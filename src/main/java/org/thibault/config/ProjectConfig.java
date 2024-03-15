@@ -1,5 +1,6 @@
 package org.thibault.config;
 
+import feign.RequestInterceptor;
 import feign.auth.BasicAuthRequestInterceptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -15,25 +16,19 @@ import org.thibault.model.AuthResponseDTO;
 @EnableFeignClients(basePackages = "org.thibault.proxy")
 public class ProjectConfig {
   
-  @Value("${cogip.username}")
-  private String username;
-
-  @Value("${cogip.password}")
-  private String password;
-  
-  @Bean
-  public BasicAuthRequestInterceptor basicAuthRequestInterceptor(){
-    return new BasicAuthRequestInterceptor(username, password);
-  }
-  
-//  @Bean
-//  public AuthResponseDTO authResponseDTO(){
-//    return new AuthResponseDTO();
-//  }
+//  @Value("${cogip.username}")
+//  private String username;
+//
+//  @Value("${cogip.password}")
+//  private String password;
 //
 //  @Bean
-//  public AuthResponseDTO authResponseDTO() {
-//    return new AuthResponseDTO();
+//  public BasicAuthRequestInterceptor basicAuthRequestInterceptor(){
+//    return new BasicAuthRequestInterceptor(username, password);
 //  }
   
+
 }
+
+
+
