@@ -20,6 +20,7 @@ public class AuthInterceptor implements RequestInterceptor {
     requestTemplate.header("Authorization", "Bearer " + this.authController.getAuthResponseDTO().getAccessToken());
   }
   
+  
 
   
 }
