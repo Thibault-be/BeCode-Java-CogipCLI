@@ -22,9 +22,9 @@ public class InvoiceController {
   
   
   @GetMapping("/invoices")
-  public List<InvoiceDTO> getAllInvoices(@RequestHeader("Authorization") String authorization){
-    System.out.println(authorization);
-    return this.apiProxy.getAllInvoices(authorization);
+  public List<InvoiceDTO> getAllInvoices(){ //@RequestHeader("Authorization") String authorization){
+    //System.out.println(authorization);
+    return this.apiProxy.getAllInvoices() ; //authorization);
   }
   
   @GetMapping ("/invoices/search")

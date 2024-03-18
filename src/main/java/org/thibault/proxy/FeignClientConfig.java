@@ -10,16 +10,16 @@ import org.thibault.controllers.AuthController;
 @Configuration
 public class FeignClientConfig {
   
-  AuthController authController;
+  //AuthController authController;
   
-  @Autowired
-  public FeignClientConfig(AuthController authController) {
-    this.authController = authController;
-  }
+  //@Autowired
+  //public FeignClientConfig(AuthController authController) {
+  //  this.authController = authController;
+  // }
   
   @Bean
   public RequestInterceptor requestInterceptor() {
-    return new AuthInterceptor(authController);
+    return new AuthInterceptor();
   }
   
 

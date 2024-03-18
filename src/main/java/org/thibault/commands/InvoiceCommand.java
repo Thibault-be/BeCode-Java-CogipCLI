@@ -66,9 +66,9 @@ public class InvoiceCommand {
   
   private void getAllInvoices(){
     //System.out.println(this.authResponseDTO.getAccessToken());
-    String accessToken = this.authController.getAuthResponseDTO().getAccessToken();
-    System.out.println(accessToken);
-    this.invoiceController.getAllInvoices("Bearer " + accessToken)
+    //String accessToken = this.authController.getAuthResponseDTO().getAccessToken();
+    //System.out.println(accessToken);
+    this.invoiceController.getAllInvoices() //"Bearer " + accessToken)
             .forEach(invoice -> System.out.println(invoice));
   }
   

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.thibault.model.AuthResponseDTO;
 import org.thibault.model.UserCredentials;
 import org.thibault.proxy.ApiProxy;
+import org.thibault.services.AuthService;
 
 @RestController
 public class AuthController {
@@ -17,22 +18,26 @@ public class AuthController {
   @Autowired
   private final ApiProxy apiProxy;
   
+  @Autowired
+  private AuthService authService;
   
-  private AuthResponseDTO authResponseDTO;
-  
-  public AuthController(ApiProxy apiProxy) {
+  @Autowired
+  public AuthController(ApiProxy apiProxy, AuthService authService) {
     this.apiProxy = apiProxy;
+    this.authService = authService;
   }
   
   @PostMapping ("/login")
   public ResponseEntity<AuthResponseDTO> login(@RequestHeader("Authorization") String authorization,
           @RequestBody UserCredentials userCredentials){
     
-    this.authResponseDTO = this.apiProxy.login(authorization, userCredentials).getBody();
+    AuthResponseDTO authResponseDTO = this.apiProxy.login(authorization, userCredentials).getBody();
+    
+    this.authService.setJwToken(authResponseDTO.getAccessToken());
     return this.apiProxy.login(authorization, userCredentials);
   }
   
-  public AuthResponseDTO getAuthResponseDTO() {
-    return authResponseDTO;
-  }
+//  public AuthResponseDTO getAuthResponseDTO() {
+//    return authResponseDTO;
+//  }
 }

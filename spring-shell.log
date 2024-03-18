@@ -327,3 +327,10 @@
 1710500625204:invoice get
 1710500646792:user get
 1710500651576:company get
+1710752286881:invoice get
+1710752309531:login -u tbo -p tbo
+1710752705401:invoice get
+1710752711503:login -u tbo -p tbo
+1710752888411:invoice get
+1710752896394:invoice get --type outgoing
+1710752900632:company get
