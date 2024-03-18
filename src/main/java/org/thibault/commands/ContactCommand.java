@@ -1,6 +1,5 @@
 package org.thibault.commands;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
 import org.thibault.controllers.ContactController;
@@ -64,7 +63,6 @@ import java.util.List;
       System.out.println(this.contactController.addContact(contactToAdd));
     }
     
-    
     private void updateContact(int id, String firstname, String lastname, String phone, String email, Integer companyId){
       ContactDTO contactToUpdate = new ContactDTO(firstname, lastname, phone, email, companyId);
       System.out.println(this.contactController.updateContact(id, contactToUpdate));
@@ -73,7 +71,6 @@ import java.util.List;
     private void deleteContact(int id){
       System.out.println(this.contactController.deleteContact(id));
     }
-    
   }
   
 

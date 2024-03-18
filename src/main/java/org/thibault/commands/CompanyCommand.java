@@ -1,6 +1,5 @@
 package org.thibault.commands;
 
-
 import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.command.annotation.Command;
@@ -9,8 +8,6 @@ import org.thibault.controllers.CompanyController;
 import org.thibault.enums.CompanyType;
 import org.thibault.enums.converters.EnumConverter;
 import org.thibault.model.CompanyDTO;
-
-import java.sql.SQLOutput;
 import java.util.List;
 
 @Command (group= "Company commands", description = "Commands related to company data.")
@@ -82,5 +79,4 @@ public class CompanyCommand {
       System.out.println(ex.contentUTF8());
     }
   }
-  
 }

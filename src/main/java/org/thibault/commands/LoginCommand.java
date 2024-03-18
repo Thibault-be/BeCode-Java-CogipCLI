@@ -1,7 +1,5 @@
 package org.thibault.commands;
 
-import feign.Feign;
-import feign.auth.BasicAuthRequestInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.shell.command.annotation.Command;
@@ -30,29 +28,19 @@ public class LoginCommand {
     
     String basicAuthHeader = "Basic " + java.util.Base64.getEncoder().encodeToString((username + ":" + password).getBytes());
     
-    //UserCredentials userCredentials = new UserCredentials(username, password,  UserRole.ADMIN);
-    
     ResponseEntity<AuthResponseDTO> authDTO =  this.authController.login(basicAuthHeader,
             new UserCredentials(username, password, UserRole.ADMIN));
-    
-    
-    //ResponseEntity<AuthResponseDTO> authDTO =  this.authController.login(userCredentials);
-    
-    
-    //System.out.println(this.authController.getAuthResponseDTO().getAccessToken());
     
     if (authDTO.getStatusCode().is2xxSuccessful()) {
       AuthResponseDTO authResponseDTO = authDTO.getBody();
       if (authResponseDTO != null) {
-        System.out.println("Login successful. Access token: " + authResponseDTO.getAccessToken());
+        System.out.println("Login successful");
       } else {
         System.out.println("Authentication failed. No response received.");
       }
     } else {
       System.out.println("Authentication failed. Status code: " + authDTO.getStatusCodeValue());
     }
-    
-
     return "";
   }
 }
