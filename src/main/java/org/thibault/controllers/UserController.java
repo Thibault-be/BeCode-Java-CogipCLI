@@ -51,6 +51,4 @@ public class UserController {
   public String deleteUser(@PathVariable("id") int id){
     return this.apiProxy.deleteUser(id);
   }
-  
-
 }

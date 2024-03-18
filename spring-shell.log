@@ -340,3 +340,6 @@
 1710753603652:contact get
 1710753655288:login -u admin -p admin
 1710753658898:invoice get
+1710753909853:login -u admin -p admin
+1710753912308:invoice get
+1710753916060:company get

@@ -1,6 +1,5 @@
 package org.thibault.controllers;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,10 +14,7 @@ import org.thibault.services.AuthService;
 @RestController
 public class AuthController {
   
-  @Autowired
   private final ApiProxy apiProxy;
-  
-  @Autowired
   private AuthService authService;
   
   @Autowired
@@ -29,15 +25,9 @@ public class AuthController {
   
   @PostMapping ("/login")
   public ResponseEntity<AuthResponseDTO> login(@RequestHeader("Authorization") String authorization,
-          @RequestBody UserCredentials userCredentials){
-    
+                                               @RequestBody UserCredentials userCredentials) {
     AuthResponseDTO authResponseDTO = this.apiProxy.login(authorization, userCredentials).getBody();
-    
     this.authService.setJwToken(authResponseDTO.getAccessToken());
     return this.apiProxy.login(authorization, userCredentials);
   }
-  
-//  public AuthResponseDTO getAuthResponseDTO() {
-//    return authResponseDTO;
-//  }
 }

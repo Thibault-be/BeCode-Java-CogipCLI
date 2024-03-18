@@ -1,7 +1,5 @@
 package org.thibault.controllers;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.thibault.model.ContactDTO;
 import org.thibault.proxy.ApiProxy;
@@ -17,7 +15,6 @@ public class ContactController {
     this.apiProxy = apiProxy;
   }
   
-  
   @GetMapping("/contacts")
   public List<ContactDTO> getAllContacts() {
     return this.apiProxy.getAllContacts();
@@ -27,7 +24,6 @@ public class ContactController {
   public ContactDTO getContactById(@PathVariable("id") int id){
     return this.apiProxy.getContactById(id);
   }
-  
   
   @GetMapping ("/contacts/search")
   public List<ContactDTO> getContactsByFilters(
@@ -47,7 +43,7 @@ public class ContactController {
   
   @PutMapping ("/contacts/{id}")
   public ContactDTO updateContact(@PathVariable("id") int id,
-                                               @RequestBody ContactDTO contact){
+                                  @RequestBody ContactDTO contact){
     return this.apiProxy.updateContact(id, contact);
   }
   
