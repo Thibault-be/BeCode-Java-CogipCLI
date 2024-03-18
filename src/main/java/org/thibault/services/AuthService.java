@@ -7,9 +7,7 @@ public class AuthService {
   
   private String jwToken;
   
-  public AuthService(){
-    System.out.println("making bean authservice");
-  }
+  public AuthService(){  }
   
   public String getJwToken() {
     return jwToken;

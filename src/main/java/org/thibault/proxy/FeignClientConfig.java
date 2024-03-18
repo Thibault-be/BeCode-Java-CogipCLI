@@ -9,26 +9,9 @@ import org.thibault.controllers.AuthController;
 
 @Configuration
 public class FeignClientConfig {
-  
-  //AuthController authController;
-  
-  //@Autowired
-  //public FeignClientConfig(AuthController authController) {
-  //  this.authController = authController;
-  // }
-  
   @Bean
   public RequestInterceptor requestInterceptor() {
     return new AuthInterceptor();
   }
-  
-
 }
-  
-
-  
-//  @Bean
-//  public RequestInterceptor requestInterceptor(){
-//    String accessToken = this.authController.getAuthResponseDTO().getAccessToken();
-//    return new AuthInterceptor(accessToken);
 
