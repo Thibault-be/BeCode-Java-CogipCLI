@@ -343,3 +343,14 @@
 1710753909853:login -u admin -p admin
 1710753912308:invoice get
 1710753916060:company get
+1710754508980:package org.thibault.config;
+1710754508987:import org.springframework.context.annotation.Configuration;
+1710754508989:@Configuration
+1710754508991:public class SecurityConfig {
+1710754508993:}
+1710754515917:login -u intern -p intern
+1710754554682:login -u tbo -p tbo
+1710754567205:invoice get
+1710754597543:login -u intern -p intern
+1710754625478:login -u jill -p jill
+1710754678712:invoice get
