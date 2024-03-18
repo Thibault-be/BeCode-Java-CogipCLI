@@ -86,10 +86,7 @@ public interface ApiProxy {
   
   //********INVOICE MAPPING*********//
   @GetMapping ("/invoices")
-  List<InvoiceDTO> getAllInvoices(); //@RequestHeader("Authorization") String authorization);
-  
-//  @GetMapping("invoices/{id}")
-//  InvoiceDTO getInvoiceById(@PathVariable("id") int id);
+  List<InvoiceDTO> getAllInvoices();
   
   @GetMapping ("/invoices/search")
   List<InvoiceDTO> searchInvoicesByFilters(
@@ -113,6 +110,5 @@ public interface ApiProxy {
   @PostMapping ("/login")
   ResponseEntity<AuthResponseDTO> login(@RequestHeader("Authorization") String authorization,
                                         @RequestBody UserCredentials userCredentials);
-
   
 }
