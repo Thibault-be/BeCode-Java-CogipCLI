@@ -75,5 +75,4 @@ public class UserCommand {
     System.out.println("User with id " + id + " has been deleted.");
   }
 }
-  
 

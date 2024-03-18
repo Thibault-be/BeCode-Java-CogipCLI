@@ -1,7 +1,5 @@
 package org.thibault.controllers;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.thibault.enums.Currency;
 import org.thibault.enums.InvoiceStatus;
@@ -19,7 +17,6 @@ public class InvoiceController {
   public InvoiceController(ApiProxy apiProxy){
     this.apiProxy = apiProxy;
   }
-  
   
   @GetMapping("/invoices")
   public List<InvoiceDTO> getAllInvoices(){
@@ -49,6 +46,4 @@ public class InvoiceController {
           @RequestBody InvoiceDTO invoiceDTO){
     return this.apiProxy.updateInvoice(id, invoiceDTO);
   }
-  
-  
 }

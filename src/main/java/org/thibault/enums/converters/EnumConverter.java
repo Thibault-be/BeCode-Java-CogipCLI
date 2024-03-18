@@ -45,7 +45,4 @@ public class EnumConverter {
     if (type.equalsIgnoreCase("outgoing")) return InvoiceType.OUTGOING;
     return null;
   }
-  
-  
-  
 }

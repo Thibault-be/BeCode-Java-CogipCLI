@@ -1,7 +1,9 @@
 package org.thibault.commands;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
+import org.thibault.controllers.AuthController;
 import org.thibault.controllers.InvoiceController;
 import org.thibault.enums.Currency;
 import org.thibault.enums.InvoiceStatus;
@@ -16,8 +18,13 @@ public class InvoiceCommand {
   
   private final InvoiceController invoiceController;
   
-  public InvoiceCommand(InvoiceController invoiceController) {
+  @Autowired
+  private final AuthController authController;
+  
+  @Autowired
+  public InvoiceCommand(InvoiceController invoiceController, AuthController authController){ //, AuthResponseDTO authResponseDTO) {
     this.invoiceController = invoiceController;
+    this.authController = authController;
   }
   
   @Command(command = "invoice", description = "Commands for the invoices.")
