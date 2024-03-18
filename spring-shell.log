@@ -334,3 +334,5 @@
 1710752888411:invoice get
 1710752896394:invoice get --type outgoing
 1710752900632:company get
+1710753016344:login -u admin -p admin
+1710753018351:invoice get
