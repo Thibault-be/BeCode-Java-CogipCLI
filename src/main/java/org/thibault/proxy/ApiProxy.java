@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.thibault.enums.*;
 import org.thibault.model.*;
 import org.thibault.model.joindto.JoinCompanyDTO;
+import org.thibault.model.joindto.JoinContactDTO;
 import org.thibault.model.joindto.JoinInvoiceDTO;
 
 import java.util.List;
@@ -61,13 +62,13 @@ public interface ApiProxy {
   
   //********CONTACT MAPPING*********//
   @GetMapping ("/contacts")
-  List<ContactDTO> getAllContacts();
+  List<JoinContactDTO> getAllContacts();
   
   @GetMapping ("/contacts/{id}")
   ContactDTO getContactById(@PathVariable("id") int id);
   
   @GetMapping ("/contacts/search")
-  List<ContactDTO> getContactsByFilters(
+  List<JoinContactDTO> getContactsByFilters(
           @RequestParam (required = false) Integer id,
           @RequestParam (required = false) String firstname,
           @RequestParam (required = false) String lastname,

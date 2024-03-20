@@ -2,6 +2,7 @@ package org.thibault.controllers;
 
 import org.springframework.web.bind.annotation.*;
 import org.thibault.model.ContactDTO;
+import org.thibault.model.joindto.JoinContactDTO;
 import org.thibault.proxy.ApiProxy;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class ContactController {
   }
   
   @GetMapping("/contacts")
-  public List<ContactDTO> getAllContacts() {
+  public List<JoinContactDTO> getAllContacts() {
     return this.apiProxy.getAllContacts();
   }
   
@@ -26,7 +27,7 @@ public class ContactController {
   }
   
   @GetMapping ("/contacts/search")
-  public List<ContactDTO> getContactsByFilters(
+  public List<JoinContactDTO> getContactsByFilters(
           @RequestParam(required = false) Integer id,
           @RequestParam (required = false) String firstname,
           @RequestParam (required = false) String lastname,
