@@ -30,8 +30,10 @@ public class InvoiceCommand {
   @Command(command = "invoice", description = "Commands for the invoices.")
   public void getInvoiceData(@Option (longNames = "crud", required = true) String crud,
                              @Option (longNames= "id", shortNames = 'i') Integer id,
-                             @Option (longNames = {"companyId", "company", "comp"}) Integer companyId,
-                             @Option (longNames = {"contactId", "contact", "cont"}) Integer contactId,
+                             @Option (longNames = {"companyName", "company", "comp"}) String companyName,
+                             @Option (longNames = {"companyId", "compId"}) Integer companyId,
+                             @Option (longNames = {"contactName", "contact", "cont"}) String contactName,
+                             @Option (longNames = {"contactId", "contId"}) Integer contactId,
                              @Option (longNames = {"invoiceNumber","invoice", "inv"}) String invoiceNumber,
                              @Option (longNames = {"value", "val"}, shortNames = 'v')BigDecimal value,
                              @Option (longNames = {"currency", "cur"}, shortNames = 'c') String currency,
@@ -44,11 +46,11 @@ public class InvoiceCommand {
     
     switch (crud){
       case("get"):
-        if (id == null && companyId == null && contactId == null && invoiceNumber == null &&
+        if (id == null && companyName == null && contactName == null && invoiceNumber == null &&
             value == null && currencyEnum == null && typeEnum  == null && statusEnum  == null){
           getAllInvoices();
         } else{
-          getInvoicesByFilters(id, companyId, invoiceNumber, currencyEnum, typeEnum, statusEnum);
+          getInvoicesByFilters(id, companyName, invoiceNumber, currencyEnum, typeEnum, statusEnum, contactName);
         }
         break;
       case ("post"):
@@ -65,10 +67,10 @@ public class InvoiceCommand {
             .forEach(invoice -> System.out.println(invoice));
   }
   
-  private void getInvoicesByFilters(Integer id, Integer companyId,  String invoiceNumber,
-                                     Currency currency, InvoiceType type, InvoiceStatus status){
-    this.invoiceController.searchInvoicesByFilters(id, companyId,  invoiceNumber, currency,
-            type, status).forEach(System.out::println);
+  private void getInvoicesByFilters(Integer id, String companyName, String invoiceNumber, Currency currency,
+                                    InvoiceType type, InvoiceStatus status, String contactName){
+    this.invoiceController.searchInvoicesByFilters(id, companyName,  invoiceNumber, currency,
+            type, status, contactName).forEach(System.out::println);
   }
   
   private void addInvoice(int companyId, int contactId, String invoiceNumber, BigDecimal value,

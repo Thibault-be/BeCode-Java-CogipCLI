@@ -25,15 +25,16 @@ public class InvoiceController {
   }
   
   @GetMapping ("/invoices/search")
-  public List<InvoiceDTO> searchInvoicesByFilters(
-          @RequestParam(required = false) Integer id,
-          @RequestParam (required = false) Integer companyId,
+  public List<JoinInvoiceDTO> searchInvoicesByFilters(
+          @RequestParam (required = false) Integer id,
+          @RequestParam (required = false) String companyName,
           @RequestParam (required = false) String invoiceNumber,
           @RequestParam (required = false) Currency currency,
           @RequestParam (required = false) InvoiceType type,
-          @RequestParam (required = false) InvoiceStatus status
+          @RequestParam (required = false) InvoiceStatus status,
+          @RequestParam (required = false) String contactName
   ){
-    return this.apiProxy.searchInvoicesByFilters(id, companyId, invoiceNumber, currency, type, status);
+    return this.apiProxy.searchInvoicesByFilters(id, companyName, invoiceNumber, currency, type, status, contactName);
   }
   
   @PostMapping("/invoices")

@@ -3,6 +3,7 @@ package org.thibault.model.joindto;
 import org.thibault.enums.CompanyType;
 import org.thibault.enums.Currency;
 import org.thibault.enums.InvoiceStatus;
+import org.thibault.enums.InvoiceType;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -14,7 +15,7 @@ public class JoinInvoiceDTO {
   private Currency currency;
   private InvoiceStatus status;
   private String companyName;
-  private CompanyType companyType;
+  private InvoiceType invoiceType;
   private String contact;
   private Timestamp timestamp;
   
@@ -60,12 +61,12 @@ public class JoinInvoiceDTO {
     this.companyName = companyName;
   }
   
-  public CompanyType getCompanyType() {
-    return companyType;
+  public InvoiceType getInvoiceType() {
+    return invoiceType;
   }
   
-  public void setCompanyType(CompanyType companyType) {
-    this.companyType = companyType;
+  public void setInvoiceType(InvoiceType invoiceType) {
+    this.invoiceType = invoiceType;
   }
   
   public String getContact() {
@@ -90,11 +91,9 @@ public class JoinInvoiceDTO {
             this.value + " - " +
             this.currency + " - " +
             this.status + " - " +
+            this.invoiceType + " - " +
             this.companyName + " - " +
             this.contact + " - " +
             this.timestamp;
-    
   }
-  
-  
 }

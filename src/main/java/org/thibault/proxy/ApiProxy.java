@@ -85,19 +85,19 @@ public interface ApiProxy {
   @DeleteMapping ("contacts/{id}")
   String deleteContact(@PathVariable("id") int id);
   
-  
   //********INVOICE MAPPING*********//
   @GetMapping ("/invoices")
   List<JoinInvoiceDTO> getAllInvoices();
   
   @GetMapping ("/invoices/search")
-  List<InvoiceDTO> searchInvoicesByFilters(
+  List<JoinInvoiceDTO> searchInvoicesByFilters(
           @RequestParam (required = false) Integer id,
-          @RequestParam (required = false) Integer companyId,
+          @RequestParam (required = false) String companyName,
           @RequestParam (required = false) String invoiceNumber,
           @RequestParam (required = false) Currency currency,
           @RequestParam (required = false) InvoiceType type,
-          @RequestParam (required = false) InvoiceStatus status
+          @RequestParam (required = false) InvoiceStatus status,
+          @RequestParam (required = false) String contactName
   );
   
   @PostMapping ("/invoices")
