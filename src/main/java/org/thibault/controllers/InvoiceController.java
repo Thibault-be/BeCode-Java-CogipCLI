@@ -5,6 +5,7 @@ import org.thibault.enums.Currency;
 import org.thibault.enums.InvoiceStatus;
 import org.thibault.enums.InvoiceType;
 import org.thibault.model.InvoiceDTO;
+import org.thibault.model.joindto.JoinInvoiceDTO;
 import org.thibault.proxy.ApiProxy;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class InvoiceController {
   }
   
   @GetMapping("/invoices")
-  public List<InvoiceDTO> getAllInvoices(){
+  public List<JoinInvoiceDTO> getAllInvoices(){
     return this.apiProxy.getAllInvoices();
   }
   

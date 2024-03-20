@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.thibault.enums.*;
 import org.thibault.model.*;
 import org.thibault.model.joindto.JoinCompanyDTO;
+import org.thibault.model.joindto.JoinInvoiceDTO;
 
 import java.util.List;
 
@@ -87,7 +88,7 @@ public interface ApiProxy {
   
   //********INVOICE MAPPING*********//
   @GetMapping ("/invoices")
-  List<InvoiceDTO> getAllInvoices();
+  List<JoinInvoiceDTO> getAllInvoices();
   
   @GetMapping ("/invoices/search")
   List<InvoiceDTO> searchInvoicesByFilters(
