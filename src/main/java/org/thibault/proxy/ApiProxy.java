@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.thibault.enums.*;
 import org.thibault.model.*;
+import org.thibault.model.joindto.JoinCompanyDTO;
 
 import java.util.List;
 
@@ -45,7 +46,7 @@ public interface ApiProxy {
           @RequestParam (required = false) CompanyType type);
   
   @GetMapping("/companies")
-  List<CompanyDTO> getAllCompanies();
+  List<JoinCompanyDTO> getAllCompanies();
   
   @PostMapping ("/companies/add")
   CompanyDTO addCompany(@RequestBody CompanyDTO companyDTO);

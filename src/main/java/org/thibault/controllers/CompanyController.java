@@ -3,6 +3,7 @@ package org.thibault.controllers;
 import org.springframework.web.bind.annotation.*;
 import org.thibault.enums.CompanyType;
 import org.thibault.model.CompanyDTO;
+import org.thibault.model.joindto.JoinCompanyDTO;
 import org.thibault.proxy.ApiProxy;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class CompanyController {
   }
   
   @GetMapping("/companies")
-  public List<CompanyDTO> getAllCompanies(){
+  public List<JoinCompanyDTO> getAllCompanies(){
     return this.apiProxy.getAllCompanies();
   }
   
