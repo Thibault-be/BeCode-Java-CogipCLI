@@ -73,7 +73,8 @@ public class JoinCompanyDTO {
   
   @Override
   public String toString(){
-    return this.id + " - " + this.name + " - " + this.country + " - " + this.vat + " - " + this.invoices  + " - " + this.contacts;
+    return this.id + " - " + this.name + " - " + this.country + " - " + this.vat + " - " +
+            this.type.name() + " - " + this.invoices  + " - " + this.contacts;
   }
   
 }
