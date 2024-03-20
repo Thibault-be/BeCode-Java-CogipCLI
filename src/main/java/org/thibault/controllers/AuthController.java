@@ -28,6 +28,7 @@ public class AuthController {
                                                @RequestBody UserCredentials userCredentials) {
     AuthResponseDTO authResponseDTO = this.apiProxy.login(authorization, userCredentials).getBody();
     this.authService.setJwToken(authResponseDTO.getAccessToken());
+    System.out.println(authResponseDTO.getAccessToken());
     return this.apiProxy.login(authorization, userCredentials);
   }
 }
