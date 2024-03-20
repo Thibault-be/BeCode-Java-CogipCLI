@@ -23,7 +23,7 @@ public class CompanyController {
   }
   
   @GetMapping ("/companies/search")
-  public List<CompanyDTO> searchCompaniesByFilters(
+  public List<JoinCompanyDTO> searchCompaniesByFilters(
           @RequestParam (required = false) Integer id,
           @RequestParam (required = false) String name,
           @RequestParam (required = false) String country,

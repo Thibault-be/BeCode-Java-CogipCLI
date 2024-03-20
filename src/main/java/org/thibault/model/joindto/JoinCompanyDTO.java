@@ -1,5 +1,7 @@
 package org.thibault.model.joindto;
 
+import org.thibault.enums.CompanyType;
+
 import java.util.List;
 
 public class JoinCompanyDTO {
@@ -7,6 +9,7 @@ public class JoinCompanyDTO {
   private String name;
   private String country;
   private String vat;
+  private CompanyType type;
   private List<Integer> invoices;
   private List<String> contacts;
   
@@ -58,6 +61,14 @@ public class JoinCompanyDTO {
   
   public void setContacts(List<String> contacts) {
     this.contacts = contacts;
+  }
+  
+  public CompanyType getType() {
+    return type;
+  }
+  
+  public void setType(CompanyType type) {
+    this.type = type;
   }
   
   @Override

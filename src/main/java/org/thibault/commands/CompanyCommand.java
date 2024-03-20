@@ -47,12 +47,12 @@ public class CompanyCommand {
   }
   
   private void getAllCompanies(){
-    this.companyController.getAllCompanies().forEach(companyDTO -> System.out.println(companyDTO));
+    this.companyController.getAllCompanies().forEach(joinCompanyDTO -> System.out.println(joinCompanyDTO));
   }
   
   private void getCompaniesByFilters(Integer id, String name, String country, String vat, CompanyType type){
     this.companyController.searchCompaniesByFilters(id, name, country, vat, type)
-            .forEach(companyDTO -> System.out.println(companyDTO));
+            .forEach(joinCompanyDTO -> System.out.println(joinCompanyDTO));
   }
   
   private void addCompany(String name, String country, String vat, CompanyType type){

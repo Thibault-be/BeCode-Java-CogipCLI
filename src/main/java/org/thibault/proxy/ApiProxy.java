@@ -38,7 +38,7 @@ public interface ApiProxy {
   
   //********COMPANY MAPPING*********//
   @GetMapping("/companies/search")
-  List<CompanyDTO> searchCompaniesByFilters(
+  List<JoinCompanyDTO> searchCompaniesByFilters(
           @RequestParam (required = false) Integer id,
           @RequestParam (required = false) String name,
           @RequestParam (required = false) String country,
