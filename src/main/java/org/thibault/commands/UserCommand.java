@@ -1,5 +1,7 @@
 package org.thibault.commands;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
@@ -22,12 +24,13 @@ public class UserCommand {
                       @Option(longNames= "id", shortNames = 'i', required = false, description = "Filter based on id.") Integer id,
                       @Option(longNames = "user", shortNames = 'u', required = false, description = "Filter based on username.") String username,
                       @Option(longNames = "password", shortNames = 'p', required = false, description = "Password for new user") String password,
-                      @Option(longNames = "role", shortNames = 'r', required = false, description = "Filter based on role.") String role) {
-    
+                      @Option(longNames = "role", shortNames = 'r', required = false, description = "Filter based on role.") String role,
+                      @Option(longNames = "json", shortNames = 'j', required = false, description = "print as Json") String json) {
+        
     switch (crud) {
       case ("get"):
         if(id == null && username == null && role == null) {
-          getAllUsers();
+          getAllUsers(json);
         } else {
           getUsersByFilters(id, username, role);
         }
@@ -46,10 +49,15 @@ public class UserCommand {
     }
   }
   
-  private void getAllUsers() {
+  private void getAllUsers(String json) {
     List<UserDTO> users = this.userController.getAllUsers();
-    for (UserDTO user : users) {
-      System.out.println(user.toString());
+    if (json != null && (json.equals("j") || json.equals("json"))){
+      Gson gson = new GsonBuilder().setPrettyPrinting().create();
+      System.out.println(gson.toJson(users));
+    } else {
+      for (UserDTO user : users) {
+        System.out.println(user.toString());
+      }
     }
   }
   
