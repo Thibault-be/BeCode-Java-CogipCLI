@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.command.annotation.Command;
+import org.springframework.shell.command.annotation.ExceptionResolver;
 import org.springframework.shell.command.annotation.Option;
 import org.thibault.controllers.UserController;
 import org.thibault.enums.UserRole;
