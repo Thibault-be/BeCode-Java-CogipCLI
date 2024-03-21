@@ -49,10 +49,6 @@ import org.thibault.enums.UserRole;
       return this.id + " - " + this.username + " - " + this.role;
     }
     
-    public String toJson(){
-      Gson gson = new GsonBuilder().setPrettyPrinting().create();
-      return gson.toJson(this);
-    }
   }
   
 

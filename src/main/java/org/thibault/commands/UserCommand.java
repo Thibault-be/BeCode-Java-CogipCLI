@@ -32,7 +32,7 @@ public class UserCommand {
         if(id == null && username == null && role == null) {
           getAllUsers(json);
         } else {
-          getUsersByFilters(id, username, role);
+          getUsersByFilters(id, username, role, json);
         }
         break;
       case ("post"):
@@ -51,19 +51,12 @@ public class UserCommand {
   
   private void getAllUsers(String json) {
     List<UserDTO> users = this.userController.getAllUsers();
-    if (json != null && (json.equals("j") || json.equals("json"))){
-      Gson gson = new GsonBuilder().setPrettyPrinting().create();
-      System.out.println(gson.toJson(users));
-    } else {
-      for (UserDTO user : users) {
-        System.out.println(user.toString());
-      }
-    }
+    printUserList(users, json);
   }
   
-  private void getUsersByFilters(Integer id, String username, String role){
-    this.userController.getUsersByFilters(id, username, role)
-            .forEach(userDTO -> System.out.println(userDTO.toString()));
+  private void getUsersByFilters(Integer id, String username, String role, String json){
+    List<UserDTO> filteredUsers = this.userController.getUsersByFilters(id, username, role);
+    printUserList(filteredUsers, json);
   }
   
   private void addUser(String username, String password, UserRole role){
@@ -81,6 +74,18 @@ public class UserCommand {
   private void deleteUser(int id){
     this.userController.deleteUser(id);
     System.out.println("User with id " + id + " has been deleted.");
+  }
+  
+  
+  private void printUserList(List<UserDTO> users, String json){
+    if (json != null && (json.equals("j") || json.equals("json"))){
+      Gson gson = new GsonBuilder().setPrettyPrinting().create();
+      System.out.println(gson.toJson(users));
+    } else {
+      for (UserDTO user : users) {
+        System.out.println(user.toString());
+      }
+    }
   }
 }
 
