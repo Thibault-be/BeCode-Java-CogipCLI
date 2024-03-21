@@ -73,7 +73,7 @@ public interface ApiProxy {
           @RequestParam (required = false) String firstname,
           @RequestParam (required = false) String lastname,
           @RequestParam (required = false) String phone,
-          @RequestParam (required = false) Integer companyId
+          @RequestParam (required = false) String companyName
   );
   
   @PostMapping ("/contacts")

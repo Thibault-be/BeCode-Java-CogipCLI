@@ -32,9 +32,9 @@ public class ContactController {
           @RequestParam (required = false) String firstname,
           @RequestParam (required = false) String lastname,
           @RequestParam (required = false) String phone,
-          @RequestParam (required = false) Integer companyId
+          @RequestParam (required = false) String companyName
   ){
-    return this.apiProxy.getContactsByFilters(id, firstname, lastname, phone, companyId);
+    return this.apiProxy.getContactsByFilters(id, firstname, lastname, phone, companyName);
   }
   
   @PostMapping("/contacts")
