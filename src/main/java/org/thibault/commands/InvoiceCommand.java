@@ -1,5 +1,7 @@
 package org.thibault.commands;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
@@ -10,8 +12,11 @@ import org.thibault.enums.InvoiceStatus;
 import org.thibault.enums.InvoiceType;
 import org.thibault.enums.converters.EnumConverter;
 import org.thibault.model.InvoiceDTO;
+import org.thibault.model.joindto.JoinContactDTO;
+import org.thibault.model.joindto.JoinInvoiceDTO;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Command (group = "Invoice commands", description = "Commands related to invoices.")
 public class InvoiceCommand {
@@ -38,7 +43,8 @@ public class InvoiceCommand {
                              @Option (longNames = {"value", "val"}, shortNames = 'v')BigDecimal value,
                              @Option (longNames = {"currency", "cur"}, shortNames = 'c') String currency,
                              @Option (longNames = {"invoiceType", "type"}, shortNames = 't') String type,
-                             @Option (longNames = {"invoiceStatus", "status"}, shortNames = 's') String status){
+                             @Option (longNames = {"invoiceStatus", "status"}, shortNames = 's') String status,
+                             @Option(longNames = "json", shortNames = 'j') String json){
     
     Currency currencyEnum = new EnumConverter().converStringToCurrency(currency);
     InvoiceType typeEnum = new EnumConverter().convertStringToInvoiceType(type);
@@ -48,9 +54,9 @@ public class InvoiceCommand {
       case("get"):
         if (id == null && companyName == null && contactName == null && invoiceNumber == null &&
             value == null && currencyEnum == null && typeEnum  == null && statusEnum  == null){
-          getAllInvoices();
+          getAllInvoices(json);
         } else{
-          getInvoicesByFilters(id, companyName, invoiceNumber, currencyEnum, typeEnum, statusEnum, contactName);
+          getInvoicesByFilters(id, companyName, invoiceNumber, currencyEnum, typeEnum, statusEnum, contactName, json);
         }
         break;
       case ("post"):
@@ -62,15 +68,20 @@ public class InvoiceCommand {
     }
   }
   
-  private void getAllInvoices(){
-    this.invoiceController.getAllInvoices()
-            .forEach(invoice -> System.out.println(invoice));
+  private void getAllInvoices(String json){
+    List<JoinInvoiceDTO> invoices = this.invoiceController.getAllInvoices();
+    printInvoicesList(invoices, json);
+    //this.invoiceController.getAllInvoices()            .forEach(invoice -> System.out.println(invoice));
   }
   
   private void getInvoicesByFilters(Integer id, String companyName, String invoiceNumber, Currency currency,
-                                    InvoiceType type, InvoiceStatus status, String contactName){
-    this.invoiceController.searchInvoicesByFilters(id, companyName,  invoiceNumber, currency,
-            type, status, contactName).forEach(System.out::println);
+                                    InvoiceType type, InvoiceStatus status, String contactName, String json){
+    List<JoinInvoiceDTO> filteredInvoices = this.invoiceController.searchInvoicesByFilters(id, companyName,  invoiceNumber, currency,
+            type, status, contactName);
+    printInvoicesList(filteredInvoices, json);
+    
+    //this.invoiceController.searchInvoicesByFilters(id, companyName,  invoiceNumber, currency,
+      //      type, status, contactName).forEach(System.out::println);
   }
   
   private void addInvoice(int companyId, int contactId, String invoiceNumber, BigDecimal value,
@@ -85,4 +96,16 @@ public class InvoiceCommand {
                                       currencyEnum, typeEnum, statusEnum);
     System.out.println(this.invoiceController.updateInvoice(id, invoiceToUpdate));
   }
+  
+  private void printInvoicesList(List<JoinInvoiceDTO> invoices, String json){
+    if (json != null && (json.equals("j") || json.equals("json"))){
+      Gson gson = new GsonBuilder().setPrettyPrinting().create();
+      System.out.println(gson.toJson(invoices));
+    } else {
+      for (JoinInvoiceDTO invoice : invoices) {
+        System.out.println(invoice.toString());
+      }
+    }
+  }
+  
 }
