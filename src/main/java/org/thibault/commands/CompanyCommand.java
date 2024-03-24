@@ -97,8 +97,17 @@ public class CompanyCommand {
       Gson gson = new GsonBuilder().setPrettyPrinting().create();
       System.out.println(gson.toJson(companies));
     } else {
-      for (JoinCompanyDTO user : companies) {
-        System.out.println(user.toString());
+      System.out.println("+------+------------------------+------------------+-------------------------+------------+");
+      System.out.println("|  id  |         Company        |      Country     |           vat           |    Type    |");
+      System.out.println("+------+------------------------+------------------+-------------------------+------------+");
+      for (JoinCompanyDTO company : companies) {
+        System.out.printf("|  %2s  |  %20s  |  %14s  |  %21s  |  %8s  |\n",
+                company.getId(),
+                company.getName(),
+                company.getCountry(),
+                company.getVat(),
+                company.getType().name());
+        System.out.println("+------+------------------------+------------------+-------------------------+------------+");
       }
     }
   }
