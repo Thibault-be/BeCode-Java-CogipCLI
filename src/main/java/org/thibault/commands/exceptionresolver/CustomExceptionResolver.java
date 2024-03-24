@@ -22,6 +22,11 @@ class CustomExceptionResolver implements CommandExceptionResolver {
       String errorMessage = "You have entered an illegal parameter. Try using explicit flags for data entry.";
       return CommandHandlingResult.of("\u001B[35m"+errorMessage+"\n"+"\u001B[0m", 42);
     }
+    if (ex instanceof EnumException){
+      String errorMessage = ex.getMessage();
+      return CommandHandlingResult.of("\u001B[35m"+errorMessage+"\n"+"\u001B[0m", 42);
+      
+    }
     return null;
   }
   
