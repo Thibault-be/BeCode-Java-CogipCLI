@@ -16,7 +16,7 @@ public class EnumConverter {
     if (role.equalsIgnoreCase("intern")){
       return UserRole.INTERN;
     }
-    throw new EnumException("When filtering for 'Role', please make sure to enter 'admin', accountant' or 'intern'.");
+    throw new EnumException("When filtering for 'Role', please make sure to enter 'admin', 'accountant' or 'intern'.");
   }
   
   public CompanyType convertStringToCompanyType(String type){

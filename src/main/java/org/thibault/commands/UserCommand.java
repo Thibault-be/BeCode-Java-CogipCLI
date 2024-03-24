@@ -83,8 +83,15 @@ public class UserCommand {
       Gson gson = new GsonBuilder().setPrettyPrinting().create();
       System.out.println(gson.toJson(users));
     } else {
+
+      System.out.println("+------+----------------+-------------+");
+      System.out.println("|  ID  |     Username   |      Role   |");
+      System.out.println("+------+----------------+-------------+");
       for (UserDTO user : users) {
-        System.out.println(user.toString());
+        System.out.printf("|  %2d  | %12s   |  %10s |\n", user.getId(), user.getUsername(),user.getRole().name());
+        System.out.println("+------+----------------+-------------+");
+        
+        //System.out.println(user.toString());
       }
     }
   }
