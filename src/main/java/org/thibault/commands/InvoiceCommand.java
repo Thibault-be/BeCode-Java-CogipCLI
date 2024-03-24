@@ -71,7 +71,6 @@ public class InvoiceCommand {
   private void getAllInvoices(String json){
     List<JoinInvoiceDTO> invoices = this.invoiceController.getAllInvoices();
     printInvoicesList(invoices, json);
-    //this.invoiceController.getAllInvoices()            .forEach(invoice -> System.out.println(invoice));
   }
   
   private void getInvoicesByFilters(Integer id, String companyName, String invoiceNumber, Currency currency,
@@ -79,9 +78,6 @@ public class InvoiceCommand {
     List<JoinInvoiceDTO> filteredInvoices = this.invoiceController.searchInvoicesByFilters(id, companyName,  invoiceNumber, currency,
             type, status, contactName);
     printInvoicesList(filteredInvoices, json);
-    
-    //this.invoiceController.searchInvoicesByFilters(id, companyName,  invoiceNumber, currency,
-      //      type, status, contactName).forEach(System.out::println);
   }
   
   private void addInvoice(int companyId, int contactId, String invoiceNumber, BigDecimal value,
@@ -102,8 +98,19 @@ public class InvoiceCommand {
       Gson gson = new GsonBuilder().setPrettyPrinting().create();
       System.out.println(gson.toJson(invoices));
     } else {
+      System.out.println("+----------+------------+------------+----------+-----------+--------------------+---------------------+");
+      System.out.println("|  Number  |   Value    |  Currency  |  Status  |   Type    |      Company       |       Contact       |");
+      System.out.println("+----------+------------+------------+----------+-----------+--------------------+---------------------+");
       for (JoinInvoiceDTO invoice : invoices) {
-        System.out.println(invoice.toString());
+        System.out.printf("| %7s  | %10.2f |     %3s    |   %4s   | %8s  | %17s  |  %18s |\n", invoice.getInvoiceNumber(),
+                                                                          invoice.getValue(),
+                                                                          invoice.getCurrency().name(),
+                                                                          invoice.getStatus().name(),
+                                                                          invoice.getInvoiceType().name(),
+                                                                          invoice.getCompanyName(),
+                                                                          invoice.getContact()
+                                                                                  );
+        System.out.println("+----------+------------+------------+----------+-----------+--------------------+---------------------+");
       }
     }
   }

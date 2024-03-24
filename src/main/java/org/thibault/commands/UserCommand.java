@@ -90,8 +90,6 @@ public class UserCommand {
       for (UserDTO user : users) {
         System.out.printf("|  %2d  | %12s   |  %10s |\n", user.getId(), user.getUsername(),user.getRole().name());
         System.out.println("+------+----------------+-------------+");
-        
-        //System.out.println(user.toString());
       }
     }
   }
