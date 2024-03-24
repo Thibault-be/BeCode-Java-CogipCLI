@@ -7,9 +7,7 @@ import org.springframework.shell.command.annotation.Option;
 import org.thibault.controllers.ContactController;
 import org.thibault.model.CompanyDTO;
 import org.thibault.model.ContactDTO;
-import org.thibault.model.joindto.JoinCompanyDTO;
 import org.thibault.model.joindto.JoinContactDTO;
-
 import java.util.List;
 
 
@@ -78,13 +76,23 @@ import java.util.List;
       System.out.println(this.contactController.deleteContact(id));
     }
     
-    private void printContactsList(List<JoinContactDTO> contacts, String json){
-      if (json != null && (json.equals("j") || json.equals("json"))){
+    private void printContactsList(List<JoinContactDTO> contacts, String json) {
+      if (json != null && (json.equals("j") || json.equals("json"))) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         System.out.println(gson.toJson(contacts));
       } else {
+        System.out.println("+---------------+-------------------+--------------------------------------+----------------+---------------------+");
+        System.out.println("|  First name   |     Last name     |                Email                 |     Phone      |        Company      |");
+        System.out.println("+---------------+-------------------+--------------------------------------+----------------+---------------------+");
         for (JoinContactDTO contact : contacts) {
-          System.out.println(contact.toString());
+          
+          System.out.printf("| %12s  | %15s   | %36s  | %12s  | %18s  |  ",
+                  contact.getFirstname(),
+                  contact.getLastname(),
+                  contact.getEmail(),
+                  contact.getPhone(),
+                  contact.getCompanyName());
+          System.out.println("\n+---------------+-------------------+--------------------------------------+----------------+---------------------+");
         }
       }
     }
