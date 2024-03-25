@@ -56,15 +56,11 @@ public class CompanyCommand {
   private void getAllCompanies(String json){
     List<JoinCompanyDTO> companies = this.companyController.getAllCompanies();
     printCompanyList(companies, json);
-    
-    //this.companyController.getAllCompanies().forEach(joinCompanyDTO -> System.out.println(joinCompanyDTO));
   }
   
   private void getCompaniesByFilters(Integer id, String name, String country, String vat, CompanyType type, String json){
     List<JoinCompanyDTO> filteredCompanies =  this.companyController.searchCompaniesByFilters(id, name, country, vat, type);
     printCompanyList(filteredCompanies, json);
-    
-    //this.companyController.searchCompaniesByFilters(id, name, country, vat, type).forEach(joinCompanyDTO -> System.out.println(joinCompanyDTO));
   }
   
   private void addCompany(String name, String country, String vat, CompanyType type){
