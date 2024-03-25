@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
+import org.thibault.commands.exceptionresolver.NoAccessException;
 import org.thibault.controllers.AuthController;
 import org.thibault.enums.UserRole;
 import org.thibault.model.AuthResponseDTO;
@@ -33,9 +34,16 @@ public class LoginCommand {
     
     String basicAuthHeader = "Basic " + java.util.Base64.getEncoder().encodeToString((username + ":" + password).getBytes());
     
+    try{
+      ResponseEntity<AuthResponseDTO> authDTO =  this.authController.login(basicAuthHeader,
+              new UserCredentials(username, password, UserRole.ADMIN));
+    } catch (Exception e){
+      throw new NoAccessException("The entered username and password are not valid.");
+    }
+    
     ResponseEntity<AuthResponseDTO> authDTO =  this.authController.login(basicAuthHeader,
             new UserCredentials(username, password, UserRole.ADMIN));
-    
+
     if (authDTO.getStatusCode().is2xxSuccessful()) {
       AuthResponseDTO authResponseDTO = authDTO.getBody();
       if (authResponseDTO != null) {

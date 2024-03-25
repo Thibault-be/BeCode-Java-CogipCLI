@@ -14,8 +14,13 @@ class CustomExceptionResolver implements CommandExceptionResolver {
   
   @Override
   public CommandHandlingResult resolve(Exception ex) {
+    if (ex instanceof NoAccessException) {
+      String errorMessage = ex.getMessage();
+      return CommandHandlingResult.of("\u001B[35m"+errorMessage+"\n"+"\u001B[0m", 42);
+    }
     if (ex instanceof FeignException) {
       String errorMessage = extractErrorMessage(ex.getMessage());
+      if (errorMessage.isEmpty()) errorMessage = "Access denied.";
       return CommandHandlingResult.of("\u001B[35m"+errorMessage+"\n"+"\u001B[0m", 42);
     }
     if (ex instanceof ConversionFailedException){
@@ -25,7 +30,6 @@ class CustomExceptionResolver implements CommandExceptionResolver {
     if (ex instanceof EnumException){
       String errorMessage = ex.getMessage();
       return CommandHandlingResult.of("\u001B[35m"+errorMessage+"\n"+"\u001B[0m", 42);
-      
     }
     return null;
   }
