@@ -6,19 +6,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.ExceptionResolver;
 import org.springframework.shell.command.annotation.Option;
+import org.thibault.commands.exceptionresolver.LoginStatusException;
 import org.thibault.controllers.UserController;
 import org.thibault.enums.UserRole;
 import org.thibault.enums.converters.EnumConverter;
 import org.thibault.model.CreateUserDTO;
 import org.thibault.model.UserDTO;
+import org.thibault.services.AuthService;
 
 import java.util.List;
 
 @Command (group="User commands", description = "Commands related to user data.")
 public class UserCommand {
   
-  @Autowired
   private UserController userController;
+  
+  private final AuthService authService;
+  
+  @Autowired
+  public UserCommand(UserController userController, AuthService authService) {
+    this.userController = userController;
+    this.authService = authService;
+  }
   
   @Command(command = "user", description = "Fetch information from the database")
   public void getData(@Option(longNames = "crud", required = true) String crud,
@@ -27,7 +36,12 @@ public class UserCommand {
                       @Option(longNames = "password", shortNames = 'p', required = false, description = "Password for new user") String password,
                       @Option(longNames = "role", shortNames = 'r', required = false, description = "Filter based on role.") String role,
                       @Option(longNames = "json", shortNames = 'j', required = false, description = "print as Json") String json) {
-        
+    
+    if (authService.getJwToken() == null){
+      throw new LoginStatusException("Please login first.");
+    }
+    
+    
     switch (crud) {
       case ("get"):
         if(id == null && username == null && role == null) {

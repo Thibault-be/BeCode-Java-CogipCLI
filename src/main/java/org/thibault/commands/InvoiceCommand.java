@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
+import org.thibault.commands.exceptionresolver.LoginStatusException;
 import org.thibault.controllers.AuthController;
 import org.thibault.controllers.InvoiceController;
 import org.thibault.enums.Currency;
@@ -14,6 +15,7 @@ import org.thibault.enums.converters.EnumConverter;
 import org.thibault.model.InvoiceDTO;
 import org.thibault.model.joindto.JoinContactDTO;
 import org.thibault.model.joindto.JoinInvoiceDTO;
+import org.thibault.services.AuthService;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -27,9 +29,13 @@ public class InvoiceCommand {
   private final AuthController authController;
   
   @Autowired
-  public InvoiceCommand(InvoiceController invoiceController, AuthController authController){ //, AuthResponseDTO authResponseDTO) {
+  private final AuthService authService;
+  
+  @Autowired
+  public InvoiceCommand(InvoiceController invoiceController, AuthController authController, AuthService authService){
     this.invoiceController = invoiceController;
     this.authController = authController;
+    this.authService = authService;
   }
   
   @Command(command = "invoice", description = "Commands for the invoices.")
@@ -45,6 +51,10 @@ public class InvoiceCommand {
                              @Option (longNames = {"invoiceType", "type"}, shortNames = 't') String type,
                              @Option (longNames = {"invoiceStatus", "status"}, shortNames = 's') String status,
                              @Option(longNames = "json", shortNames = 'j') String json){
+    
+    if (authService.getJwToken() == null){
+      throw new LoginStatusException("Please login first.");
+    }
     
     Currency currencyEnum = new EnumConverter().converStringToCurrency(currency);
     InvoiceType typeEnum = new EnumConverter().convertStringToInvoiceType(type);

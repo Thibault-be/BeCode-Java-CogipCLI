@@ -4,10 +4,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
+import org.thibault.commands.exceptionresolver.LoginStatusException;
 import org.thibault.controllers.ContactController;
 import org.thibault.model.CompanyDTO;
 import org.thibault.model.ContactDTO;
 import org.thibault.model.joindto.JoinContactDTO;
+import org.thibault.services.AuthService;
+
 import java.util.List;
 
 
@@ -15,9 +18,11 @@ import java.util.List;
   public class ContactCommand {
     
     private final ContactController contactController;
+    private final AuthService authService;
     
-    public ContactCommand(ContactController contactController) {
+    public ContactCommand(ContactController contactController, AuthService authService ) {
       this.contactController = contactController;
+      this.authService = authService;
     }
     
     @Command(command = "contact", description = "Fetch contact information from the database")
@@ -30,6 +35,10 @@ import java.util.List;
                                            @Option(longNames = {"companyId", "compId"}) Integer companyId,
                                            @Option(longNames = {"companyName", "compName"}, shortNames = 'c') String companyName,
                                            @Option(longNames = "json", shortNames = 'j') String json) {
+      
+      if (authService.getJwToken() == null){
+        throw new LoginStatusException("Please login first.");
+      }
       
       switch (crud) {
         case ("get"):

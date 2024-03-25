@@ -18,6 +18,10 @@ class CustomExceptionResolver implements CommandExceptionResolver {
       String errorMessage = ex.getMessage();
       return CommandHandlingResult.of("\u001B[35m"+errorMessage+"\n"+"\u001B[0m", 42);
     }
+    if (ex instanceof LoginStatusException){
+      String errorMessage = ex.getMessage();
+      return CommandHandlingResult.of("\u001B[35m"+errorMessage+"\n"+"\u001B[0m", 42);
+    }
     if (ex instanceof FeignException) {
       String errorMessage = extractErrorMessage(ex.getMessage());
       if (errorMessage.isEmpty()) errorMessage = "Access denied.";

@@ -6,12 +6,14 @@ import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
+import org.thibault.commands.exceptionresolver.LoginStatusException;
 import org.thibault.controllers.CompanyController;
 import org.thibault.enums.CompanyType;
 import org.thibault.enums.converters.EnumConverter;
 import org.thibault.model.CompanyDTO;
 import org.thibault.model.UserDTO;
 import org.thibault.model.joindto.JoinCompanyDTO;
+import org.thibault.services.AuthService;
 
 import java.util.List;
 
@@ -20,6 +22,9 @@ public class CompanyCommand {
   
   @Autowired
   private CompanyController companyController;
+  
+  @Autowired
+  private AuthService authService;
   
   @Command (command = "company", description = "Fetch company information from the database")
   public List<CompanyDTO> getCompanyData(@Option(longNames = "crud", required = true) String crud,
@@ -31,6 +36,10 @@ public class CompanyCommand {
                                          @Option(longNames = "json", shortNames = 'j') String json
   ) {
     CompanyType companyType = new EnumConverter().convertStringToCompanyType(type);
+    
+    if (authService.getJwToken() == null){
+      throw new LoginStatusException("Please login first.");
+    }
     
     switch (crud) {
       case ("get"):
