@@ -52,6 +52,5 @@ public class LoginCommand {
   public void logout(){
     authService.setJwToken(null);
     System.out.println("You've logged out of the service.");
-    
   }
 }
