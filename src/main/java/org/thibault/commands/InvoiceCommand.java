@@ -76,8 +76,9 @@ public class InvoiceCommand {
       case ("put"):
         updateInvoice(id, companyId, contactId, invoiceNumber, value, currencyEnum, typeEnum, statusEnum);
         break;
+      default:
+        throw new WrongMethodException("Please enter a correct command: get, post, put or delete");
     }
-    throw new WrongMethodException("Please enter a correct command: get, post, put or delete");
   }
   
   private void getAllInvoices(String json){

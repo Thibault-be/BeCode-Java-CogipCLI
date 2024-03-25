@@ -62,8 +62,9 @@ public class UserCommand {
       case("delete"):
         deleteUser(id);
         break;
+      default:
+        throw new WrongMethodException("Please enter a correct command: get, post, put or delete");
     }
-    throw new WrongMethodException("Please enter a correct command: get, post, put or delete");
   }
   
   private void getAllUsers(String json) {

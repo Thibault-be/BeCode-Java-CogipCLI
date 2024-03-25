@@ -58,10 +58,10 @@ import java.util.List;
         case ("delete"):
           deleteContact(id);
           break;
-        
+        default:
+          throw new WrongMethodException("Please enter a correct command: get, post, put or delete");
       }
-      throw new WrongMethodException("Please enter a correct command: get, post, put or delete");
-      
+      return null;
     }
     
     private void getAllContacts(String json){

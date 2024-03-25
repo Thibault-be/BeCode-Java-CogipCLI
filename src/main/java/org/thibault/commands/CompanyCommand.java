@@ -59,8 +59,10 @@ public class CompanyCommand {
       case("delete"):
         deleteCompany(id);
         break;
+      default:
+        throw new WrongMethodException("Please enter a correct command: get, post, put or delete");
     }
-    throw new WrongMethodException("Please enter a correct command: get, post, put or delete");
+    return null;
   }
   
   private void getAllCompanies(String json){
