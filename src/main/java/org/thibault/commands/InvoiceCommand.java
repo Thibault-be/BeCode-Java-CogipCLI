@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
 import org.thibault.commands.exceptionresolver.LoginStatusException;
+import org.thibault.commands.exceptionresolver.WrongMethodException;
 import org.thibault.controllers.AuthController;
 import org.thibault.controllers.InvoiceController;
 import org.thibault.enums.Currency;
@@ -76,6 +77,7 @@ public class InvoiceCommand {
         updateInvoice(id, companyId, contactId, invoiceNumber, value, currencyEnum, typeEnum, statusEnum);
         break;
     }
+    throw new WrongMethodException("Please enter a correct command: get, post, put or delete");
   }
   
   private void getAllInvoices(String json){

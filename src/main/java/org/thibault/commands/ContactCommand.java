@@ -4,7 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
+import org.thibault.commands.exceptionresolver.IdEmptyException;
 import org.thibault.commands.exceptionresolver.LoginStatusException;
+import org.thibault.commands.exceptionresolver.WrongMethodException;
 import org.thibault.controllers.ContactController;
 import org.thibault.model.CompanyDTO;
 import org.thibault.model.ContactDTO;
@@ -39,7 +41,6 @@ import java.util.List;
       if (authService.getJwToken() == null){
         throw new LoginStatusException("Please login first.");
       }
-      
       switch (crud) {
         case ("get"):
           if (id == null && firstname == null && lastname == null && phone == null && companyName == null){
@@ -57,8 +58,10 @@ import java.util.List;
         case ("delete"):
           deleteContact(id);
           break;
+        
       }
-      return null;
+      throw new WrongMethodException("Please enter a correct command: get, post, put or delete");
+      
     }
     
     private void getAllContacts(String json){
@@ -76,7 +79,9 @@ import java.util.List;
       System.out.println(this.contactController.addContact(contactToAdd));
     }
     
-    private void updateContact(int id, String firstname, String lastname, String phone, String email, Integer companyId){
+    private void updateContact(Integer id, String firstname, String lastname, String phone, String email, Integer companyId){
+      
+      if (id == null || !(id instanceof Integer)) throw new IdEmptyException("Please enter the id of the contact that you want to update");
       ContactDTO contactToUpdate = new ContactDTO(firstname, lastname, phone, email, companyId);
       System.out.println(this.contactController.updateContact(id, contactToUpdate));
     }

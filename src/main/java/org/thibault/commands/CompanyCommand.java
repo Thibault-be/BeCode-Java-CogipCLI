@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
 import org.thibault.commands.exceptionresolver.LoginStatusException;
+import org.thibault.commands.exceptionresolver.WrongMethodException;
 import org.thibault.controllers.CompanyController;
 import org.thibault.enums.CompanyType;
 import org.thibault.enums.converters.EnumConverter;
@@ -59,7 +60,7 @@ public class CompanyCommand {
         deleteCompany(id);
         break;
     }
-    return null;
+    throw new WrongMethodException("Please enter a correct command: get, post, put or delete");
   }
   
   private void getAllCompanies(String json){
@@ -83,6 +84,7 @@ public class CompanyCommand {
     getCompaniesByFilters(id, null,null, null,null, json);
     
     CompanyDTO companyToUpdate = new CompanyDTO(name, country, vat, type);
+    System.out.println("COmpany dto");
     this.companyController.updateCompany(id, companyToUpdate);
     
     System.out.println("\nNew information:");

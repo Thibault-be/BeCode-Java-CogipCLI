@@ -7,6 +7,7 @@ import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.ExceptionResolver;
 import org.springframework.shell.command.annotation.Option;
 import org.thibault.commands.exceptionresolver.LoginStatusException;
+import org.thibault.commands.exceptionresolver.WrongMethodException;
 import org.thibault.controllers.UserController;
 import org.thibault.enums.UserRole;
 import org.thibault.enums.converters.EnumConverter;
@@ -62,6 +63,7 @@ public class UserCommand {
         deleteUser(id);
         break;
     }
+    throw new WrongMethodException("Please enter a correct command: get, post, put or delete");
   }
   
   private void getAllUsers(String json) {
