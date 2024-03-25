@@ -9,6 +9,7 @@ import org.thibault.enums.UserRole;
 import org.thibault.model.AuthResponseDTO;
 import org.thibault.model.UserCredentials;
 import org.thibault.proxy.ApiProxy;
+import org.thibault.services.AuthService;
 
 @Command (group= "Login", description = "Command to log in to the service.")
 public class LoginCommand {
@@ -16,14 +17,18 @@ public class LoginCommand {
   private final AuthController authController;
   private final ApiProxy apiProxy;
   
+  //new
+  private final AuthService authService;
+  
   @Autowired
-  public LoginCommand(AuthController authController, ApiProxy apiProxy){
+  public LoginCommand(AuthController authController, ApiProxy apiProxy, AuthService authService){
     this.authController = authController;
     this.apiProxy = apiProxy;
+    this.authService = authService;
   }
   
   @Command (command = "login", description = "To log in into the system.")
-  public String login(@Option (longNames = {"username", "user"}, shortNames = 'u', required = true) String username,
+  public void login(@Option (longNames = {"username", "user"}, shortNames = 'u', required = true) String username,
                                @Option (longNames = {"password", "pass"}, shortNames = 'p', required = true) String password) {
     
     String basicAuthHeader = "Basic " + java.util.Base64.getEncoder().encodeToString((username + ":" + password).getBytes());
@@ -41,6 +46,12 @@ public class LoginCommand {
     } else {
       System.out.println("Authentication failed. Status code: " + authDTO.getStatusCodeValue());
     }
-    return "";
+  }
+  
+  @Command (command= "logout", description= "To log out of the system.")
+  public void logout(){
+    authService.setJwToken(null);
+    System.out.println("You've logged out of the service.");
+    
   }
 }
