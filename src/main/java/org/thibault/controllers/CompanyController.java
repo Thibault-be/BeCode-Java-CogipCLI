@@ -5,7 +5,6 @@ import org.thibault.enums.CompanyType;
 import org.thibault.model.CompanyDTO;
 import org.thibault.model.joindto.JoinCompanyDTO;
 import org.thibault.proxy.ApiProxy;
-
 import java.util.List;
 
 @RestController
