@@ -163,17 +163,3 @@ https://github.com/Thibault-be/BeCode-Java-CogipRestApi
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
-
-
-
-
- @Option (longNames= "id", shortNames = 'i') Integer id,
- @Option (longNames = {"companyName", "company", "comp"}) String companyName,
- @Option (longNames = {"companyId", "compId"}) Integer companyId,
- @Option (longNames = {"contactName", "contact", "cont"}) String contactName,
- @Option (longNames = {"contactId", "contId"}) Integer contactId,
- @Option (longNames = {"invoiceNumber","invoice", "inv"}) String invoiceNumber,
- @Option (longNames = {"value", "val"}, shortNames = 'v')BigDecimal value,
- @Option (longNames = {"currency", "cur"}, shortNames = 'c') String currency,
- @Option (longNames = {"invoiceType", "type"}, shortNames = 't') String type,
- @Option (longNames = {"invoiceStatus", "status"}, shortNames = 's') String status,
