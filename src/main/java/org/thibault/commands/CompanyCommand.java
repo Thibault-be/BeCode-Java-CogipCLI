@@ -86,7 +86,6 @@ public class CompanyCommand {
     getCompaniesByFilters(id, null,null, null,null, json);
     
     CompanyDTO companyToUpdate = new CompanyDTO(name, country, vat, type);
-    System.out.println("COmpany dto");
     this.companyController.updateCompany(id, companyToUpdate);
     
     System.out.println("\nNew information:");

@@ -80,8 +80,6 @@ import java.util.List;
     }
     
     private void updateContact(Integer id, String firstname, String lastname, String phone, String email, Integer companyId){
-      
-      if (id == null || !(id instanceof Integer)) throw new IdEmptyException("Please enter the id of the contact that you want to update");
       ContactDTO contactToUpdate = new ContactDTO(firstname, lastname, phone, email, companyId);
       System.out.println(this.contactController.updateContact(id, contactToUpdate));
     }
