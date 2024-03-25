@@ -3,6 +3,7 @@ package org.thibault.commands;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.shell.command.annotation.Command;
+import org.springframework.shell.command.annotation.CommandAvailability;
 import org.springframework.shell.command.annotation.Option;
 import org.thibault.commands.exceptionresolver.NoAccessException;
 import org.thibault.controllers.AuthController;
@@ -15,6 +16,7 @@ import org.thibault.services.AuthService;
 @Command (group= "Login", description = "Command to log in to the service.")
 public class LoginCommand {
   
+  //private final CommandAvailability commandAvailability;
   private final AuthController authController;
   private final ApiProxy apiProxy;
   
@@ -22,10 +24,11 @@ public class LoginCommand {
   private final AuthService authService;
   
   @Autowired
-  public LoginCommand(AuthController authController, ApiProxy apiProxy, AuthService authService){
+  public LoginCommand(AuthController authController, ApiProxy apiProxy, AuthService authService){ //}, CommandAvailability commandAvailability){
     this.authController = authController;
     this.apiProxy = apiProxy;
     this.authService = authService;
+    //this.commandAvailability = commandAvailability;
   }
   
   @Command (command = "login", description = "To log in into the system.")
@@ -37,22 +40,14 @@ public class LoginCommand {
     try{
       ResponseEntity<AuthResponseDTO> authDTO =  this.authController.login(basicAuthHeader,
               new UserCredentials(username, password, UserRole.ADMIN));
-    } catch (Exception e){
-      throw new NoAccessException("The entered username and password are not valid.");
-    }
-    
-    ResponseEntity<AuthResponseDTO> authDTO =  this.authController.login(basicAuthHeader,
-            new UserCredentials(username, password, UserRole.ADMIN));
-
-    if (authDTO.getStatusCode().is2xxSuccessful()) {
-      AuthResponseDTO authResponseDTO = authDTO.getBody();
-      if (authResponseDTO != null) {
-        System.out.println("Login successful");
-      } else {
-        System.out.println("Authentication failed. No response received.");
+      if (authDTO.getStatusCode().is2xxSuccessful()) {
+        AuthResponseDTO authResponseDTO = authDTO.getBody();
+        if (authResponseDTO != null) {
+          System.out.println("Login successful");
+        }
       }
-    } else {
-      System.out.println("Authentication failed. Status code: " + authDTO.getStatusCodeValue());
+    } catch (Exception ex){
+      throw new NoAccessException("The entered username and password are not valid.");
     }
   }
   
