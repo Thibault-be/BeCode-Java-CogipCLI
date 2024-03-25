@@ -39,7 +39,7 @@ public class InvoiceCommand {
     this.authService = authService;
   }
   
-  @Command(command = "invoice", description = "Commands for the invoices.")
+  @Command(command = "invoice", description = "Get, add or update invoice information.")
   public void getInvoiceData(@Option (longNames = "crud", required = true) String crud,
                              @Option (longNames= "id", shortNames = 'i') Integer id,
                              @Option (longNames = {"companyName", "company", "comp"}) String companyName,

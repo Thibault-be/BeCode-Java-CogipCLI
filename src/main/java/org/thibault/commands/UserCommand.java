@@ -30,7 +30,7 @@ public class UserCommand {
     this.authService = authService;
   }
   
-  @Command(command = "user", description = "Fetch information from the database")
+  @Command(command = "user", description = "Get, add, update or delete user information.")
   public void getData(@Option(longNames = "crud", required = true) String crud,
                       @Option(longNames= "id", shortNames = 'i', required = false, description = "Filter based on id.") Integer id,
                       @Option(longNames = "user", shortNames = 'u', required = false, description = "Filter based on username.") String username,

@@ -16,7 +16,7 @@ import org.thibault.services.AuthService;
 import java.util.List;
 
 
-  @Command(group= "Contact commands", description = "Commands related to contact data.")
+  @Command(group= "Contact commands", description = "Get, add or update invoice information.")
   public class ContactCommand {
     
     private final ContactController contactController;

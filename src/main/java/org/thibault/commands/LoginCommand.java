@@ -13,7 +13,7 @@ import org.thibault.model.UserCredentials;
 import org.thibault.proxy.ApiProxy;
 import org.thibault.services.AuthService;
 
-@Command (group= "Login", description = "Command to log in to the service.")
+@Command (group= "Login", description = "Command to log in to or out of the service.")
 public class LoginCommand {
   
   private final AuthController authController;

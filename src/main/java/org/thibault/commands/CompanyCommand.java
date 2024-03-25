@@ -27,7 +27,7 @@ public class CompanyCommand {
   @Autowired
   private AuthService authService;
   
-  @Command (command = "company", description = "Fetch company information from the database")
+  @Command (command = "company", description = "Get, add, update or delete company information.")
   public List<CompanyDTO> getCompanyData(@Option(longNames = "crud", required = true) String crud,
                                          @Option(longNames = "id") Integer id,
                                          @Option(longNames = "name", shortNames = 'n') String name,
